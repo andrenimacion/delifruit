@@ -1,0 +1,132 @@
+
+<div class="d-flex justify-content-end p-3 bg-info" style="color: white;">
+    <mat-icon>person_pin_circle</mat-icon> {{data_head | titlecase }}
+ </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> Datos obtenidos del control de colores. </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="tabl table-responsive">
+                <table class="table table-dark">
+                    <thead class="table-success" >
+                        <th>
+                            Color
+                        </th>
+                        <th>
+                            Descripción
+                        </th>
+                        <th>
+                            <mat-icon style="background-color: transparent;" >ok</mat-icon>
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of arrGcolor" (click)="asignColor(x.hex_cod_color, x.name_labor)" >
+                            <td [ngStyle]="{'background-color': x.hex_cod_color}" ></td>
+                            <td> {{x.name_labor}} </td>
+                            <td style="color: yellowgreen;">
+                                <mat-icon>arrow_forward_ios</mat-icon>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="conts table-responsive container-fluid">    
+    <div class="d-flex justify-content-between flex-wrap p-2" >
+        <div>
+            Seleccione un color:
+            <div class="control-color d-flex align-items-center justify-content-center"
+                 [ngStyle]="{'background-color': _color}" (click)="gcolor()"
+                 data-bs-toggle="modal" data-bs-target="#exampleModal">
+
+                 <label style="color: white;" >
+                    {{_codec_color}}
+                 </label>
+
+            </div>
+        </div>
+        <mat-form-field class="example-full-width" style="width: 300px;" appearance="fill">
+            <mat-label>Año</mat-label>
+            <input matInput placeholder="" disabled [(ngModel)]="_periodo" >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" style="width: 300px;" appearance="fill">
+            <mat-label>Semana</mat-label>
+            <input matInput placeholder="" [(ngModel)]="_semana" >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 300px;" class="example-form-field">
+            <mat-label>Rango de fechas:</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate placeholder="Start date" [(ngModel)]="_startDate" >
+              <input matEndDate   placeholder="End date"   [(ngModel)]="_endDate"   >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+
+    </div>
+    <div class="btnSetts d-flex">
+        <button mat-raised-button class="d-flex align-items-center" (click)="sDP08ACAL (_startDate, _endDate )" color="primary"> <mat-icon>add</mat-icon><span> Guardar </span></button>
+        <div class="btn btn-secondary d-flex align-items-center" (click)="orderType()">
+            <mat-icon>swap_vert</mat-icon> Orden: {{order}}
+        </div>
+    </div>
+    <div class="tabl table-responsive">
+        <table class="table table-dark">
+            <thead class="table-success" >
+                <th  >
+                    Año
+                </th>
+                <th>
+                    Periodo
+                </th>
+                <th>
+                    Semana
+                </th>
+                <th>
+                    Fec. Inicio
+                </th>
+                <th>
+                    Fec. Fin
+                </th>
+                <th>
+                    <mat-icon style="background-color: transparent;" >delete</mat-icon>
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let x of arrDp08acal" class="tr" [ngStyle]="{'border-color': x.color_asign}" >
+                    <td> {{x.anio}} </td>
+                    <td> {{x.peri}} </td>
+                    <td> {{x.sema}} </td>
+                    <td> {{x.finicio | date: 'd/M/yy'}} </td>
+                    <td> {{x.ffin | date: 'd/M/yy'}} </td>
+                    <td (click)="delDP08ACAL(x.anio, x.peri, x.sema)" style="color: orangered;" >
+                        <mat-icon>delete</mat-icon>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

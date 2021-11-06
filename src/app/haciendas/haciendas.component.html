@@ -1,0 +1,224 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title d-flex align-items-center" id="exampleModalLabel">
+            <mat-icon>gite</mat-icon> {{ ejec_hacienda | titlecase }}
+          </h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed"
+                            type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne"
+                            aria-expanded="false" (click)="getDataIn()"
+                            aria-controls="flush-collapseOne">
+                            <mat-icon>add</mat-icon> Crear lote
+                    </button>
+
+                  </h2>
+                  
+                  <div id="flush-collapseOne"
+                       class="accordion-collapse collapse" 
+                       aria-labelledby="flush-headingOne"
+                       data-bs-parent="#accordionFlushExample">
+
+                    <mat-form-field class="example-full-width w-50 d-flex flex-wrap" appearance="fill">
+                        <mat-label>Código Lote:</mat-label>
+                        <input matInput placeholder=""  [(ngModel)]="_cod_lote" (keyup)="zfill(_cod_lote, 3, '0')"  >
+                    </mat-form-field>                    
+                    
+                    <mat-form-field class="example-full-width w-50 d-flex flex-wrap" appearance="fill">
+                        <mat-label>Nombre Lote:</mat-label>
+                        <input matInput  placeholder="" [(ngModel)]="_nom_lote" >
+                    </mat-form-field>                    
+                    
+                    <mat-form-field class="example-full-width w-100 d-flex flex-wrap" appearance="fill">
+                        <mat-label>Hectareaje:</mat-label>
+                        <input matInput placeholder="" type="number" [(ngModel)]="_hectareaje_lote" >
+                    </mat-form-field>                    
+                    
+                    <button class="btn btn-success d-flex align-items-center"
+                            (click)="sLote(_cod_lote, _nom_lote, 'd-000', _hectareaje_lote)">
+                            <mat-icon>add</mat-icon> Añadir lote
+                    </button>
+
+                  </div>
+                </div>
+                
+                <!-- <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                      <button class="accordion-button collapsed bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <mat-icon>delete</mat-icon> Borrar Hacienda
+                      </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                          Borrar la hacienda implica que los lotes creados para la misma también se eliminarán, si deseas proseguir escribe a continuación el nombre de la hacienda.
+                            <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                                <mat-label>Eliminar:</mat-label>
+                                <input matInput placeholder="" [(ngModel)]="_delete_hacienda"" >
+                            </mat-form-field> 
+                            <input class="form-control" type="text" placeholder="Escribe el nombre de tu base de datos a eleminar" [(ngModel)]="_delete_hacienda" >
+                            <div class="d-flex mt-3 justify-content-end">
+                                <button class="btn btn-danger w-50 d-flex align-items-center justify-content-center"  >
+                                  <mat-icon>delete</mat-icon>  Borrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                  </div> -->
+
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end p-3 bg-info" style="color: white;">
+   <mat-icon>person_pin_circle</mat-icon> {{data_head | titlecase }} 
+</div>
+
+<div class="conts container-fluid d-flex flex-column ">
+    <span class="d-flex justify-content-center align-items-center text-secondary p-3">
+        <mat-icon>wb_shade</mat-icon> <strong> ¿Que deseas hacer? </strong>
+    </span>
+    <hr>
+    <div class="lista">
+        <div class="list-group">        
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title class="d-flex align-items-center" >
+                       <mat-icon>settings_suggest</mat-icon> Crear una hacienda:
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+                  <div class="container-fluid" >
+                      
+                    <div class="d-flex justify-content-between flex-wrap ">
+                        <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                            <mat-label>Nombre hacienda:</mat-label>
+                            <input matInput placeholder="" [(ngModel)]="_name_hacienda" (keyup)=" gcodec(_name_hacienda) " >
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                            <mat-label>Código hacienda:</mat-label>
+                            <input matInput placeholder="" disabled [(ngModel)]="_cod_hacienda" >
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                            <mat-label>#Tag:</mat-label>
+                            <input matInput disabled placeholder="" [(ngModel)]="_nomtag_hacienda" >
+                        </mat-form-field>                        
+                    </div>
+
+                    <div class="table-responsive" *ngIf="showHac" >
+                        <table class="table table-primary" >
+                            <thead>
+                                <th>Nombre</th>
+                                <th>Cod.</th>
+                                <th>Edit.</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor=" let mm of ArrHaciendas">
+                                    <td> <input class="form-control" [id]="mm.id" [value]="mm.nombre" ></td>
+                                    <td> {{mm.nomtag}} </td>
+                                    <td (click)="upname(mm.nomtag, mm.id)" ><mat-icon>autorenew</mat-icon></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="d-flex" >
+                        <button class="btn btn-success d-flex align-items-center"
+                                (click)="sHacienda(_cod_hacienda,    _name_hacienda,
+                                                   _nomtag_hacienda, 'JOR')">
+                            <mat-icon>add</mat-icon> Crear
+                        </button>
+                        <button class="btn btn-warning" (click)="showHac = !showHac" >
+                            <mat-icon>visibility</mat-icon>                            
+                        </button>
+                    </div>
+
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+        </div>
+    </div>
+
+    <hr>
+ 
+<div class="d-flex justify-content-between flex-wrap">
+
+    Hacienda seleccionada:
+    <span style="color: slateblue;" >
+        {{ejec_hacienda | uppercase }}
+        <strong>/</strong>
+        Cod.: {{codec_hacienda}}
+    </span>
+
+    <mat-accordion class="mt-2 p-3 w-100" *ngFor="let jj of ArrHaciendas" 
+                   (click)="dataPersist('name_hacienda', jj.nombre, 'codec_hacienda', jj.codigo, 'nom_tag', jj.nomtag);
+                            gMaster(jj.codigo, 'master', 3)">
+
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+
+        <mat-expansion-panel-header>
+            <mat-panel-title class="d-flex align-items-center justify-content-between" >
+              <div class="d-flex align-items-center"  >
+                  <mat-icon>gite</mat-icon> 
+                  <!-- <input class="form-control" [value]="jj.nombre | titlecase" > -->
+                  {{ jj.nombre | titlecase }}
+              </div>
+          
+              <span class="spanBox d-flex align-items-center " data-bs-toggle="modal" data-bs-target="#exampleModal">                    
+                   {{jj.nomtag }}
+              </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+            <div class="container-fluid" >       
+
+                    <div class="tabl-short table-responsive">
+                        <table class="table table-dark table align-middle">
+                            <thead class="table-success">
+                                <th>Cod.    </th>
+                                <th>Nombre  </th>
+                                <th>Hectárea</th>
+                                <th><mat-icon style="background-color: transparent;" >delete</mat-icon></th>
+                            </thead>
+                            <tbody>
+                                <tr class="tr" *ngFor="let bx of ArrLotes">
+                                    <td> {{bx.codigo}} </td>
+                                    <td> {{bx.nombre}} </td>
+                                    <td> {{bx.valor}} </td>
+                                    <td  style="color: orangered;" (click)="del(bx.codigo)" >
+                                        <mat-icon>delete</mat-icon>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btns container-fluid d-flex justify-content-end p-0 align-items-center">
+                            <div class="total bg-primary w-50 p-3 fs-3 d-flex align-items-center justify-content-end" style="color: whitesmoke;">
+                               <span style="color: white; font-size: 8pt;">Hect.:</span>
+                               {{_total_hectareaje}}
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+   
+</div>
+
+
+

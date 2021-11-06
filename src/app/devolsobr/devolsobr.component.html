@@ -1,0 +1,90 @@
+
+<div class="d-flex justify-content-end p-3 bg-info" style="color: white;">
+    <mat-icon>person_pin_circle</mat-icon> {{data_head | titlecase }}
+</div>
+
+<div class="conts table-responsive container-fluid">
+
+    <div class="container-fluid m-3" >
+        <mat-form-field class="example-full-width w-100" appearance="fill" >
+            <mat-label> <mat-icon>qr_code_scanner</mat-icon> Cod. Lote</mat-label>
+            
+            <input matInput
+                   placeholder="cod_lote_00000001"
+                   [(ngModel)]="_codec_in"
+                   (keyup.enter)="getLotes(_codec_in)">
+
+        </mat-form-field>
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-primary table align-middle">  
+            <thead>
+                <th class="col-1"></th>
+                <th>Lote</th>
+                <th>Cantidad</th>
+                <th>Cant. Devol.</th>
+                <th>Total</th>
+                <th>Motivo</th>
+            </thead>
+            <tbody>
+                <tr *ngFor=" let m of arrLotes " >
+                    <td>
+                        <button class="btn btn-success d-flex align-items-center" [disabled]='_dis_bol'
+                                (click)="sDevsobs( m.hacienda_tag, m.finit, _obser, m.cantidad, _dev_cant )" >
+                            <mat-icon>done</mat-icon>
+                        </button>
+                    </td>
+                    <td>{{ m.hacienda_tag | slice:0:15 }}</td>
+                    <td>{{ m.cantidad }}</td>
+                    <td class="col-1">
+                        <input class="form-control"
+                               [(ngModel)]="_dev_cant"
+                               (keyup)=" controlCant(_dev_cant, m.cantidad) "
+                               type="number"
+                               placeholder="0.00" >
+                    </td>
+                    <td>
+                        {{ m.cantidad - _dev_cant }}
+                    </td>
+                    <td>
+                        <textarea class="form-control" [(ngModel)]="_obser"></textarea>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="table-responsive mt-4">
+            <table class="table table-warning table-sm">
+                <thead>
+                    <th> Edit </th>
+                    <th> Fecha de creación </th>
+                    <th> Fecha de devolución </th>
+                    <th> Des. Lote </th>
+                    <th> Motivo </th>
+                    <th> Lote. Prod, </th>
+                    <th> Cant. Dev. </th>
+                    <th> Cant. Sob. </th>
+                </thead>
+                
+                <tbody>
+                    <tr *ngFor=" let x of arrDevs " >
+                       <td style= 'cursor: pointer;' (click)="updatePK(x.lote_prod, x.finit, x.observ_dev, x.cant, 'id-'+x.lote_prod)" >
+                           <mat-icon>cached</mat-icon>
+                       </td> 
+                       <td> {{ x.finit | date: 'short' }} </td> 
+                       <td> {{ x.ffin  | date: 'short' }} </td> 
+                       <td> {{ x.nom_lote }}              </td> 
+                       <td> {{ x.observ_dev }}            </td> 
+                       <td> {{ x.lote_prod }}             </td> 
+                       <td class="col-1"><input class="form-control" id="id-{{x.lote_prod}}" type="number" [value]="x.cant_dev"></td> 
+                       <td> {{ x.total }}                 </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>

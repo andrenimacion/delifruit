@@ -1,0 +1,38 @@
+<!-- <section id="demAL"></section> -->
+<div id="formActionA" class="container animated fadeIn slow">
+    <div class="logo">
+       <img src="../../assets/logotipo/part1_logo.png" style="width: auto; height: 150px;">
+       <img src="../../assets/logotipo/part2_logo.png" style="width: auto; height: 150px;">
+   </div>
+
+   <div id="formularioLogIn">
+       <div id="source2"></div>
+       <form id="formInt1">
+           
+           <div class="labelInputs mt-2 mb-2">
+               <label for="usuario" style="color: white;" >
+                   <span class="icon-adult"></span>Usuario:
+               </label>
+               <input type="text" id="usuario" class="inputs" placeholder="username" requerid [(ngModel)]="usuario" name="usuario">
+           </div>
+           <div class="labelInputs mt-2 mb-2">
+               <label for="password" style="color: white;"><span class="icon-lock-open-1"></span>Contraseña:</label>
+               <input [type]="passwordType" id="pass" class="inputs" placeholder="*****"
+               requerid [(ngModel)]="password" name="password">
+               <div class="showPass">
+                   <span class=" icon-eye-3 mt-2" id="eyeA" style="cursor:pointer;"
+                   (click)="passwordHidShow()"></span>
+                   <p class="note" id="sowerCasePass1"></p>
+               </div>
+           </div>
+
+           <button type="submit" value="Iniciar Sesión"
+                   id="loginButton"
+                   class="btn btn-primary mt-3 mb-3"
+                   (click)="logeo(usuario, password)">
+             <span class="icon-ok"></span> Ingresar
+           </button>
+
+       </form>
+   </div>
+</div>
