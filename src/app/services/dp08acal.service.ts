@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -23,5 +23,7 @@ export class Dp08acalService {
   deleteDp08acal( anio: string, peri: string, sema: string ) {
     return this.http.get( this.apiURL + '/dp08acal/DelDp08acal/' + anio + '/' + peri + '/' + sema );
   }
-
+  deleteqrlote(lotes:string, prop:string){
+    return this.http.get( this.apiURL + '/AuditPrint/delLotes/' + prop  + '/' + lotes );
+  }
 }

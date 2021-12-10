@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
-//#region Angular Material
-import {A11yModule} from '@angular/cdk/a11y';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { InformesComponent } from './components/informes/informes.component';
+import { CosechasComponent } from './components/cosechas/cosechas.component';
+import { RecusadoComponent, recusadosFragment, recusadosOptions } from './components/recusado/recusado.component';
+import { DevolucionComponent, devolucionFragment } from './components/devolucion/devolucion.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuditoriaComponent } from './components/auditoria/auditoria.component';
+import { MotRecusadoComponent } from './components/mot-recusado/mot-recusado.component';
+import { CreateCodebarComponent } from './components/create-codebar/create-codebar.component';
+import { alertremovecolor, ColoresComponent } from './components/colores/colores.component';
+import { HaciendasComponent } from './components/haciendas/haciendas.component';
+import { LoginComponent } from './components/login/login.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {PortalModule} from '@angular/cdk/portal';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -46,53 +54,54 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+// import { BarcodeGeneratorAllModule,QRCodeGeneratorAllModule,DataMatrixGeneratorAllModule } from '@syncfusion/ej2-angular-barcode-generator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
-import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { VersionamientoComponent } from './versionamiento/versionamiento.component';
-import { ConfcoloresComponent } from './confcolores/confcolores.component';
-import { DashComponent } from './dash/dash.component';
-import { CalbanComponent } from './calban/calban.component';
-import { HaciendasComponent } from './haciendas/haciendas.component';
-import { CreateCodeBarComponent } from './create-code-bar/create-code-bar.component';
-import { BarcodeGeneratorAllModule,QRCodeGeneratorAllModule,DataMatrixGeneratorAllModule } from '@syncfusion/ej2-angular-barcode-generator';
-import { HeaderComponent } from './header/header.component';
-import { AuditoriaComponent } from './auditoria/auditoria.component';
-import { DevolsobrComponent } from './devolsobr/devolsobr.component';
-
-
-//#endregion
-
-
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CalbanComponent, popupitemcolors } from './components/calban/calban.component';
+import { HeaderComponent } from './components/header/header.component';
+import { VersionamientoComponent } from './components/versionamiento/versionamiento.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    VersionamientoComponent,
-    ConfcoloresComponent,
-    DashComponent,
-    CalbanComponent,
-    HaciendasComponent,
-    CreateCodeBarComponent,
-    HeaderComponent,
+    alertremovecolor,
+    InformesComponent,
+    CosechasComponent,
+    RecusadoComponent,
+    DevolucionComponent,
+    DashboardComponent,
     AuditoriaComponent,
-    DevolsobrComponent
+    MotRecusadoComponent,
+    devolucionFragment,
+    CreateCodebarComponent,
+    ColoresComponent,
+    HaciendasComponent,
+    popupitemcolors,
+    LoginComponent,
+    CalbanComponent,
+    HeaderComponent,
+    VersionamientoComponent,
+    recusadosFragment,
+    recusadosOptions,
   ],
   imports: [
-    
-    NgxPaginationModule,
-
-    BrowserModule, BarcodeGeneratorAllModule, QRCodeGeneratorAllModule ,DataMatrixGeneratorAllModule,
-    //#region 
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    BrowserModule,
     CdkStepperModule,
     CdkTableModule,
     CdkTreeModule,
     DragDropModule,
     MatAutocompleteModule,
     MatBadgeModule,
+    NgxPaginationModule,
     MatBottomSheetModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -116,6 +125,7 @@ import { DevolsobrComponent } from './devolsobr/devolsobr.component';
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
+  
     MatSidenavModule,
     MatSliderModule,
     MatSlideToggleModule,
@@ -127,33 +137,23 @@ import { DevolsobrComponent } from './devolsobr/devolsobr.component';
     MatTooltipModule,
     MatTreeModule,
     OverlayModule,
+  
     PortalModule,
     ScrollingModule,
     //#endregion
+    FlexLayoutModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([      
-      { path: 'rule',         component: DevolsobrComponent },
-      { path: 'gpp_good',     component: AuditoriaComponent },
-      { path: 'receipt_long', component: CreateCodeBarComponent },
-      { path: 'date_range',   component: CalbanComponent },
-      { path: 'water_drop',   component: ConfcoloresComponent },
-      { path: 'dash',         component: DashComponent },
-      { path: 'wb_shade',     component: HaciendasComponent },
-      { path: 'login',        component: LoginComponent, pathMatch: 'full' },
-      { path: '**',           pathMatch: 'full', redirectTo: 'login' }
-    ]),
-
-    BrowserAnimationsModule
-
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    NgbModule
   ],
-
   providers: [],
   bootstrap: [AppComponent]
-
 })
-
 export class AppModule { }

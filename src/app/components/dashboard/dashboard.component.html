@@ -1,0 +1,20 @@
+<div class="contas">
+    <div class="menuvert">
+        <div class="leftmenu">Dashboard</div>
+        <div class="rigthmenu">
+            <div class="rigtmenut">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+            <button (click)="logout()" style="margin-left: 10px;" mat-icon-button><mat-icon>logout</mat-icon></button>
+        </div>
+    </div>
+    <div class="contitems">
+        <div matRipple  class="items" (click)="relink(x.icon_module, x.id, x.name_module)" *ngFor="let x of modsArr" id="{{ x.id }}">
+            <div class="icos">
+                <mat-icon style="font-size: 30pt !important;color: #2853ff;" >{{x.icon_module}}</mat-icon>
+            </div>
+            <p class="supheader" style="text-align: center;color: #2853ff;">
+                {{ x.name_module }}
+            </p>
+        </div>
+    </div>
+</div>
+

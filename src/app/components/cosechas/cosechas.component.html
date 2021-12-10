@@ -1,0 +1,81 @@
+<div class="contain">
+  <div class="menuvert" [class.menuanimation]="show">
+    <div class="leftmenu" ngClass.lt-sm="hiddentitle"><span class="material-icons" style="color: white;margin-right: 5px;">{{icon}}</span>{{title_header | titlecase}}</div>
+    <div class="rigthmenu">
+        <div class="rigtmenut">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+        <button (click)="logout()" style="margin-left: 10px;" mat-icon-button><mat-icon style="color: white;">logout</mat-icon></button>
+    </div>
+  </div>
+    <div class="subcontain" [class.subcontainanit]="show">
+        <mat-card class="cards">
+            <div class="title">Agregar cosecha</div>
+            <table class="search"><tr>
+                <td style="width: 100%;">
+                  <mat-form-field class="inputsearch">
+                    <mat-label>Num. lote</mat-label>
+                    <input id="input-code" (keyup.enter)="validationcodex()" (keypress)="validationcodex()" [(ngModel)]="codecs" value="" matInput placeholder="ABC123" required>
+                    <mat-icon matSuffix>qr_code_scanner</mat-icon>
+                  </mat-form-field>
+                </td>
+                <td class="tdcant">
+                  <div class="textcant1">{{codexcontados}}</div>
+                  <div class="textcant2">/{{codextotal}}</div>
+                </td>
+              </tr></table>
+              <mat-form-field  class="selects">
+                <mat-label>Hacienda </mat-label>
+                <mat-select [formControl]="Hacienda">
+                  <mat-option *ngFor="let hacienda of haciendas" [value]="hacienda.nombre" (click)="getHacienda( hacienda.nombre, hacienda.nomtag )">
+                    {{hacienda.nombre}} / {{hacienda.nomtag}}
+                  </mat-option>
+                </mat-select> 
+                <mat-error *ngIf="Semana.invalid">Selecione un valor</mat-error>
+              </mat-form-field>
+              <mat-form-field class="selects">
+                <mat-label>Semana</mat-label>
+                <mat-select [formControl]="Semana">
+                  <mat-option *ngFor="let week of weeks" [value]="week.anio" >
+                    <div class="items" (click)="asignData(week.color_asign, 'sem:' + week.sema + '/' + 'peri:' + week.peri + '/' + 'anio:' + week.anio )"><span class="text">Sem: {{week.sema}} / {{week.anio}}</span><div [ngStyle]="{'background-color': week.color_asign}" class="color"></div></div>
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="Hacienda.invalid">Selecione un valor</mat-error>
+              </mat-form-field>
+              <div class="contbutons">
+                <button (click)="adddata()" mat-raised-button style="background-color: #333333;color: white;margin-right: 10px;">Guardar</button>
+                <button (click)="resetdata()" mat-button>Resetear</button>
+              </div>
+        </mat-card>
+        <div class="cardlist" [ngStyle.lt-sm]="{'display' : 'flex'}">
+            <mat-card class="cardshor" *ngFor="let data of cosecha">
+                <div class="seccions"><span class="title">Fecha: </span><span class="text">{{ data.f_cosecha | date: 'short'}}</span> </div>
+                <div class="seccions"><span class="title">Hacienda: </span><span class="text">{{data.hacienda}}  / COD.: {{data.cod_hacienda}}</span> </div>
+                <div class="seccions"><span class="title">Semana: </span><span class="text">{{ data.semana }}</span> </div>
+                <div class="seccions"><span class="title">Color: </span><div [ngStyle]="{'background-color': data.color}" class="color"></div> </div>
+                <div class="seccions"><button (click)="delete(data.id)" class="btndelete" mat-flat-button>Borrar</button></div>
+            </mat-card>
+        </div>
+        <mat-card class="cards"  style="padding: 20px; width: 85%;" [ngStyle.xs]="{'display' : 'none'}">
+            <table class="tablet">
+                <tr class="trtablet">
+                  <td class="title " style="text-align: center;" title="Stock Anterior">Stock ant.</td>
+                  <td class="title " style="text-align: center;">Cant. Sem</td>
+                    <td class="title " style="text-align: center;">Fecha</td>
+                    <td class="title " style="text-align: center;">Hacienda</td>
+                    <td class="title " style="text-align: center;">Semana</td>
+                    <td class="title " style="text-align: center;">Color</td>
+                    <td class="title " style="text-align: center;">Borrar</td>  
+                </tr>
+                <tr class="trtable" *ngFor="let data of cosecha">
+                  <td class="title " style="font-size: 18px;font-weight: 500;text-align: center;color: rgb(145, 145, 145);">{{data.cortes}}</td>
+                  <td class="title " style="font-size: 18px;font-weight: 600;text-align: center;color: rgb(41, 255, 94);">{{data.cant_cosecha}}</td>
+                    <td class="text " style="text-align: center;"><span class="text">{{ data.f_cosecha | date: 'short'}}</span></td>
+                    <td class="text " style="text-align: center;"><span class="text">{{data.hacienda}}  / COD.: {{data.cod_hacienda}}</span></td>
+                    <td class="text " style="text-align: center;"><span class="totalnum">{{ data.semana }}</span></td>
+                    <td class="text" style="text-align: center;"><div [ngStyle]="{'background-color': data.color}" class="color"></div></td>
+                    <td class="text " style="text-align: center;"><button mat-icon-button class="btnicon" id="btn-{{data.id}}" (click)="delete(data.id)"><span class="iconst material-icons">delete</span></button></td>
+                </tr> 
+            </table>
+        </mat-card>
+    </div>
+<button [class.animatebtnfixed]="show" (click)="nextpage()" mat-fab class="itemnextpage" color="primary" aria-label="Example icon button with a delete icon"><mat-icon>error_outline</mat-icon></button>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="container-add">
+        <mat-progress-bar [ngStyle]="{'visibility':loading == true ? 'visible':'hidden'}" mode="query"></mat-progress-bar>
+        <div class="form">
+            <span class="title">Motivos</span>
+            <mat-form-field class="inputf">
+              <mat-label>Motivo</mat-label>
+              <input required id="input" #input maxlength="150" minlength="1" [(ngModel)]="titlemotiv"  matInput placeholder="Ex. Titulo" value="">
+              <mat-hint align="end">{{input.value?.length || 0}}/150</mat-hint>
+            </mat-form-field>
+          
+            <mat-form-field class="inputf">
+              <mat-label>Descripcion</mat-label>
+              <textarea #textarea id="textarea" required maxlength="250" minlength="1" [(ngModel)]="descriptmotiv" matInput placeholder="Ex. describe aqui..."></textarea>
+              <mat-hint align="end">{{textarea.value?.length || 0}}/250</mat-hint>
+            </mat-form-field>
+            <button mat-raised-button class="butoms" (click)="sendmotiv()">Guardar</button>
+        </div>
+    </div>
+    <div class="container-list">
+        <mat-progress-bar [ngStyle]="{'visibility':loadinglist == true ? 'visible':'hidden'}" mode="query"></mat-progress-bar>
+        <table class="tablet">
+            <tr class="trtablet">
+                <td class="tdclasst tdwidth1">Titulo</td>
+                <td class="tdclasst tdwidth2">Descripcion</td>
+                <td class="tdclasst tdwidth3">Acciones</td>
+            </tr>
+            <tr class="trtable" *ngFor="let data of listdata">
+              <!-- [disabled]="" -->
+                <td class="tdclass tdwidth1"><input type="text" class="inputsdis" id="nam-{{data.id}}" [value]="data.name_mot"/></td>
+                <td class="tdclass tdwidth2"><input type="text" class="inputsdis" id="des-{{data.id}}" [value]="data.descrip_mot"/></td>
+                <td class="tdclass tdwidth3">
+                    <button mat-icon-button class="btnicon" (click)="updatemotiv('nam-'+data.id, 'des-'+data.id, data.id)"><span class="material-icons icons">edit</span></button>
+                    <button mat-icon-button class="btnicon" (click)="deletemotiv(data.id)"><span class="material-icons icons">delete</span></button>
+                </td>
+            </tr> 
+        </table>
+    </div>
+  </div>

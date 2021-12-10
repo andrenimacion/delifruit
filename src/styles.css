@@ -23,6 +23,9 @@ body{
 .conts {
     height: 100vh;
     background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .tabl {

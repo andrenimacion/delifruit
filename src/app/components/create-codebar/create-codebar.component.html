@@ -1,0 +1,215 @@
+
+<div class="cont">
+  <div class="menuvert" [class.menuanimation]="show">
+    <div class="leftmenu" ngClass.lt-sm="hiddentitle"><span class="material-icons" style="color: white;margin-right: 5px;">{{icon}}</span>{{title_header | titlecase}}</div>
+    <div class="rigthmenu">
+        <div class="rigtmenut">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+        <button (click)="logout()" style="margin-left: 10px;" mat-icon-button><mat-icon style="color: white;">logout</mat-icon></button>
+    </div>
+  </div>
+  <mat-card class="cardaddqrcode" style="flex-direction: column;padding: 30px;"  [class.addqrcode]="cardsettings" ngClass.lt-sm="cardphone">
+    <div class="titlesettings">Configuracion de impresora</div>
+    <form style="width: 100%;display: flex;flex-direction: row;justify-content: space-around;flex-wrap: wrap;" [formGroup]="settingsfont">
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Width</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()" formControlName="mwidth" type="number" min="0" matInput placeholder="100">
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">El ancho es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Heigth</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="mheigth" type="number" min="0" matInput placeholder="100">
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">El alto es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Rotacion</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="mrotate" type="number" matInput placeholder="100">
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">La rotacion es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Font Size</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="msize" type="number" min="0" matInput placeholder="100">
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">El tamaño es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Margin Top</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="margint" type="number" matInput placeholder="100">
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Margin Left</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="marginl" type="number" matInput placeholder="100">
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Margin Bottom</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="marginb" type="number" matInput placeholder="100">
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Margin Rigth</mat-label>
+        <input (click)="settingsprint()" (change)="settingsprint()"  formControlName="marginr" type="number" matInput placeholder="100">
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Font Family</mat-label>
+        <mat-select formControlName="mfont" (click)="settingsprint()" (change)="settingsprint()" >
+          <mat-option *ngFor="let font of fonts" [value]="font">
+            {{font}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">La fuente es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Type Code</mat-label>
+        <mat-select formControlName="types" (click)="settingsprint()" (change)="settingsprint()" >
+          <mat-option *ngFor="let type of types" [value]="type.value">
+            {{type.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">La fuente es requerida </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" style="width: 45%;margin: 5px;" ngClass.lt-sm="respons">
+        <mat-label>Aling</mat-label>
+        <mat-select formControlName="alings"  (click)="settingsprint()" (change)="settingsprint()" >
+          <mat-option *ngFor="let aling of alings" [value]="aling.value">
+            {{aling.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="settingsfont.controls['mwidth'].hasError('required')">La fuente es requerida </mat-error>
+      </mat-form-field>
+      <div style="width: 100%;">
+        <button (click)="settingsprint()" mat-raised-button class="btnsetting">Configurar</button></div>
+    </form>
+  </mat-card>
+  <mat-card class="cardaddqrcode" [class.addqrcode]="addqrcode" ngClass.lt-sm="cardphone">
+    <div class="codexmaster">Codigo: <span style="font-weight: 500;">{{codemastert}}</span></div>
+    <mat-stepper linear #stepper style="width: 100%;">
+      <mat-step [stepControl]="firstFormGroup" [editable]="true" >
+        <form [formGroup]="firstFormGroup" style="width: 100%; flex-direction: row;flex-wrap: wrap;">
+          <ng-template matStepLabel>Semana y hacienda</ng-template>
+          <mat-form-field appearance="fill" style="width: 45%;margin: 6px;margin-top: 20px;" ngClass.lt-sm="respons">
+            <mat-label>
+              Semana:
+          </mat-label>
+          <mat-select formControlName="semana">
+            <mat-option value="one" *ngFor="let jj of arrDp08acal">
+              <div class="d-flex align-items-center justify-content-between"
+                   (click)="asignData(jj.color_asign, 'sem:' + jj.sema + '/' + 'peri:' + jj.peri + '/' + 'anio:' + jj.anio )">
+                   <!-- Ya no va el periodo  / {{jj.peri}} a peticion de JOSE VERA -->
+                  <div style="width: 10px; height: 10px;" [ngStyle]="{'background-color': jj.color_asign}"></div> Sem: {{jj.sema}}  / {{jj.anio}}
+              </div>
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 45%;margin: 6px;" ngClass.lt-sm="respons" >
+            <mat-label>
+              Hacienda:
+          </mat-label>
+          <mat-select formControlName="hacienda">
+            <mat-option value="one" *ngFor="let x of arrHaciendas">
+              <div class="d-flex align-items-center justify-content-between" (click)="getDataTables( 'codigo_hac_bcod', x.nomtag, 1, x.codigo, x.nombre )">
+               {{x.nombre}} / {{x.codigo}} / Tag: {{x.nomtag}}
+              </div>
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext >Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" [editable]="true">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Lote y año</ng-template>
+          <mat-form-field appearance="fill"  style="width: 30%;margin: 6px;margin-top: 20px;">
+            <mat-label>Año:</mat-label>
+            <input type="number" matInput formControlName="inputyear" [disabled]="false" placeholder="Last name, First name">
+          </mat-form-field>
+          <mat-form-field appearance="fill"  style="width: 60%;margin: 6px;margin-top: 20px;">
+            <mat-label>
+              Lote:
+          </mat-label>
+          <mat-select formControlName="lote">
+            <mat-option value="one" *ngFor="let x of arrFilterGet">
+              <div class="d-flex align-items-center justify-content-between" (click)="getDataTables( 'codigo_lot_bcod', x.codigo, 2, '' )">
+               Nom: {{x.nombre}} / Cod: {{x.codigo}}
+              </div>
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button (click)="returncodex(false)" matStepperPrevious>Regresar</button>
+            <button mat-button (click)="returncodex(true)" matStepperNext>Siguiente</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="threeFormGroup" [editable]="true">
+        <form [formGroup]="threeFormGroup">
+        <ng-template matStepLabel>Cantidad y generar</ng-template>
+        <mat-form-field appearance="fill" style="width: 90%;margin: 6px;">
+          <mat-label>Cantidad:</mat-label>
+          <input type="number" matInput min="0" formControlName="cant" [(ngModel)]="_secuencia" (change)="getDataTables('codigo_sec_bcod', _secuencia, 3,'')" (keyup)="getDataTables( 'codigo_sec_bcod', _secuencia, 3, '' )">
+        </mat-form-field>
+        </form>
+        <div style="display: flex;flex-direction: row;">
+          <button mat-button  (click)="returncodex(true)" matStepperPrevious>Regresar</button>
+          <button mat-button  (click)="generateBarcode(_secuencia); stepper.reset()">Generar ( {{_secuencia}} )</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </mat-card>
+  <button mat-fab class="btnint1" (click)="showaddqrcode()" [class.animatebtnfixed]="show"><mat-icon class="iconanimateadd" [class.btnaddanimat]="btnaddanimat" style="color: white;">add</mat-icon></button>
+  <button mat-fab class="btnint2" (click)="settingsimp()" id="btnsettings" [class.animatebtnfixed]="show2"><mat-icon  class="iconanimateadd" [class.btnaddanimat]="btnsettings" style="color: white;">settings</mat-icon></button>
+  <button mat-fab class="btnint3" (click)="imprSelec('dataQR')" id="btnprint" [class.animatebtnfixed]="showprint"><mat-icon [matBadge]="cantCod" matBadgeColor="warn">print</mat-icon></button>
+   <mat-card class="cards" [class.animatecard]="show" style="height: 300px;" ngClass.lt-sm="cardphone">
+      <table class="tabledlist">
+        <tr class="trtabledl">
+          <td class="titletabledl" ngClass.lt-sm="itemno">No.</td>
+          <td class="titletabledl">Codigo</td>
+          <td class="titletabledl" style="text-align: start;">Hacienda</td>
+          <td class="titletabledl">Cant.</td>
+          <td class="titletabledl">Borrar</td>
+        </tr>
+        <tr class="trtabledl2" style="margin: 10px;" *ngFor="let jj of ArrAudit; let i = index">
+          <td (click)="getAuditImpress(jj.codec_lotes_master+'-'+jj.codec_lotes, jj.cantidad)" class="texttabledl" style="text-align: center;" ngClass.lt-sm="itemno">{{i + 1}}</td>
+          <td (click)="getAuditImpress(jj.codec_lotes_master+'-'+jj.codec_lotes, jj.cantidad)" class="texttabledl" style="text-align: center;">{{jj.codec_lotes}}</td>
+          <td (click)="getAuditImpress(jj.codec_lotes_master+'-'+jj.codec_lotes, jj.cantidad)" class="texttabledl"> {{jj.hacienda_tag}}</td>
+          <td (click)="getAuditImpress(jj.codec_lotes_master+'-'+jj.codec_lotes, jj.cantidad)" class="itempopup" style="text-align: center;"><div class="pup">{{jj.cantidad}}</div></td>
+          <td style="text-align: center;"><button (click)="deleteitem(jj.codec_lotes_master+'-'+jj.codec_lotes, jj.hacienda_tag)" mat-icon-button class="btndelete"><mat-icon>clear</mat-icon></button></td>
+        </tr>
+      </table>
+   </mat-card>
+  <mat-card class="cards directioncard" [class.animatecard]="show" ngClass.lt-sm="cardphone">
+      <div class="printbtn">  Cod:    <strong> {{codecSearch}}</strong></div>
+      <div class="pagepage" id="dataQR">
+        <div *ngFor="let qr of arrAuditFilter | paginate: { itemsPerPage: _perPage, currentPage: _nPageCont }" [id]="qr.id"  >
+             {{ createQRO(qr.hacienda_tag, qr.id, qr.name_labor) }}
+        </div>
+      </div> 
+      <div class="pagediv">
+        <div class="d-flex justify-content-center m-2" >
+          <div class="numb d-flex align-items-center" >
+    
+            P. Act.:
+            <input type="number" min="0"
+                   style="width: 60px;"
+                   class="paginationId form-control"
+                   [(ngModel)]="_nPageCont"
+                   name="_nPageCont"
+                   id="pID" (change)="shist(_nPageCont)"
+                   (keyup.enter)="shist(_nPageCont)" >
+          </div>
+    
+          <div class="numb d-flex align-items-center">
+    
+            Cant. Pag.:
+            <input type="number" min="0"
+                   style="width: 60px;"
+                   class="paginationId form-control"
+                   [(ngModel)]="_perPage"
+                   name="_perPage" id="pID"
+                   (change)="shistPerPage(_perPage)"
+                   (keyup.enter)="shistPerPage(_perPage)">
+          </div>
+        </div>
+      </div>
+      <div class="paginador d-flex flex-column text-secondary align-items-center m-2 border-secondary">
+        <pagination-controls (pageChange)="_nPageCont = $event"></pagination-controls>      
+      </div>
+  </mat-card>

@@ -1,0 +1,46 @@
+<div class="conte">
+    <div class="menuvert" [class.menuanimation]="show">
+        <div class="leftmenu" ngClass.lt-sm="hiddentitle"><span class="material-icons" style="color: white;margin-right: 5px;">{{icon}}</span>{{title_header | titlecase}}</div>
+        <div class="rigthmenu">
+            <div class="rigtmenut">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+            <button (click)="logout()" style="margin-left: 10px;" mat-icon-button><mat-icon style="color: white;">logout</mat-icon></button>
+        </div>
+      </div>
+    <table class="continput" [class.animatecard]="show">
+        <tr class="continputtr">
+            <td class="inputone">
+                <input type="color" class="inputcolor" style="width: 40px;" [(ngModel)]="_color" id="exampleColorInput">
+            </td>
+            <td>
+                <mat-form-field style="width: 100%;padding-top: 5px;" class="inputcolor">
+                    <mat-label>Nombre del color</mat-label>
+                    <input matInput placeholder="----" class="inputcolor" [(ngModel)]="_valor" >
+                </mat-form-field>
+            </td>
+            <td style="text-align: center;width: 65px;padding-left: 10px;">
+                <button class="btnadd" (click)="secuenciador(); salpmaster(_color, _valor)">
+                    <mat-icon>add</mat-icon>
+                </button> 
+            </td>
+        </tr>
+    </table>
+    <mat-card class="tabled">
+    <table style="width: 100%;">
+    <tr class="tabled">
+        <td class="tdtitle">Color</td>
+        <td class="tdtitle">Nombre</td>
+        <td class="tdtitle">Borrar</td>
+    </tr>
+    <tr class="tabled" *ngFor=" let x of arrGcolor">
+        <td style="display: flex;justify-content: center;" class="tdtitle"><div [ngStyle]="{'background-color': x.hex_cod_color}" class="color"></div></td>
+        <td style="text-align: center;" class="tdtext">{{x.name_labor}}</td>
+        <td style="text-align: center;" class="tdtitle"><button (click)="removecolor(x.hex_cod_color, x.s_codec)" class="editbtn" mat-icon-button><mat-icon>delete</mat-icon>
+          </button></td>
+    </tr>
+</table>
+</mat-card>
+<button [class.animatebtnfixed]="show" (click)="nextpage()" mat-fab class="itemnextpage" color="primary" aria-label="Example icon button with a delete icon"><mat-icon>date_range</mat-icon></button>
+</div>
+
+
+

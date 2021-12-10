@@ -1,0 +1,130 @@
+<mat-drawer-container class="contmenu" hasBackdrop="true">
+  <mat-drawer #drawer class="menulate" >
+    <div class="form">
+      <span class="title">Motivos</span>
+      <mat-form-field class="inputf">
+        <mat-label>Motivo</mat-label>
+        <input required id="input" #input maxlength="150" minlength="1" [(ngModel)]="titlemotiv"  matInput placeholder="Ex. Titulo" value="">
+        <mat-hint align="end">{{input.value?.length || 0}}/150</mat-hint>
+      </mat-form-field>
+    
+      <mat-form-field class="inputf">
+        <mat-label>Descripcion</mat-label>
+        <textarea #textarea id="textarea" required maxlength="250" minlength="1" [(ngModel)]="descriptmotiv" matInput placeholder="Ex. describe aqui..."></textarea>
+        <mat-hint align="end">{{textarea.value?.length || 0}}/250</mat-hint>
+      </mat-form-field>
+      <div style="width: 80%;margin-top: 10px;"><button mat-raised-button style="background-color: #333333;color: white;" (click)="sendmotiv()">Guardar</button></div>
+  </div>
+  <div class="divtablem">
+    <table class="tbitems1" style="margin: 40px 0px;">
+      <tr class="tritems11">
+          <td class="tditems11">Titulo</td>
+          <td class="tditems11">Descripcion</td>
+          <td class="tditems11"></td>
+      </tr>
+      <tr class="tritems12" *ngFor="let data of listdata">
+          <td class="tditems12"><input type="text" class="inputsdis" id="nam-{{data.id}}" [value]="data.name_mot"/></td>
+          <td class="tditems12"><textarea type="text" class="inputsdis" id="des-{{data.id}}" [value]="data.descrip_mot"></textarea></td>
+          <td class="tditems12" style="display: flex;flex-direction: row;">
+            <button mat-icon-button (click)="updatemotiv('nam-'+data.id, 'des-'+data.id, data.id)"><span class="material-icons icons">save</span></button>
+            <button mat-icon-button (click)="deletemotiv(data.id)"><span class="material-icons icons">delete</span></button>
+          </td>
+      </tr>
+      </table>
+  </div>
+  </mat-drawer>
+  <mat-drawer-content>
+      <div class="contedor">
+        <div class="menuvert" [class.menuanimation]="show">
+          <div class="leftmenu" ngClass.lt-sm="hiddentitle"><span class="material-icons" style="color: white;margin-right: 5px;">{{icon}}</span>{{title_header | titlecase}}</div>
+          <div class="rigthmenu">
+              <div class="rigtmenut">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+              <button (click)="logout()" style="margin-left: 10px;" mat-icon-button><mat-icon style="color: white;">logout</mat-icon></button>
+          </div>
+        </div>
+        <div class="subcont">
+          <div class="contscroll">
+            <div class="titlemenu">{{titleoption}}</div>
+          <mat-form-field class="input" appearance="fill" [class.animation]="show">
+              <mat-label>Num. lote</mat-label>
+              <input id="input-code" (keyup.enter)="search()" minlength="19" (change)="search()" value="" matInput placeholder="ABC123" required>
+              <mat-icon matSuffix>qr_code_scanner</mat-icon>
+            </mat-form-field>
+            <mat-accordion class="accordion">
+              <mat-expansion-panel *ngFor="let data of checkdev" hideToggle [disabled]="panelOpenState">
+                <mat-expansion-panel-header style="height: auto; opacity: 1;">
+                  <div class="contexp">
+                    <div class="titlecard">Fecha de enfunde: <span class="textcard">{{data.finit || 'short'}}</span></div>
+                    <div class="titlecard">Cantidad enfundada: <span class="textcard" style="font-weight: 500; font-size: 18px;color: rgb(99, 99, 99);">{{data.cantidad}}</span></div>
+                    <div class="titlecard">Cantidad devuelto: <span class="textcard" style="font-weight: 500; font-size: 18px;color: rgb(223, 4, 4);">{{data.cant_dev}}</span></div>
+                    <div class="titlecard">Stock: <span class="textcard"  style="font-weight: 500; font-size: 18px;color: rgb(14, 89, 252);">{{data.totalStock}}</span></div>
+                    <div class="titlecard">Total: <span id="tol-{{data.hacienda_tag}}" class="textcard"  style="font-weight: 500; font-size: 18px;color: rgb(0, 230, 19);">{{data.totalStock }}</span></div>
+                  </div>
+                  <button mat-icon-button class="btnicon" (click)="verified()" ><span class="iconst material-icons">edit</span></button>
+                </mat-expansion-panel-header>
+          
+                <div class="cont">
+                  <mat-form-field class="inpust" *ngIf="statemotiv">
+                      <mat-label>Motivos</mat-label>
+                      <mat-select [formControl]="motives">
+                        <mat-option *ngFor="let motiv of listdata" [value]="motiv.name_mot">
+                          {{motiv.name_mot}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+          
+                    <mat-form-field class="inpust">
+                      <mat-label>Camtidad</mat-label>
+                      <input type="number" max="25" (keyup)="changenumber(data.hacienda_tag, data.totalStock)" (change)="changenumber(data.hacienda_tag, data.totalStock)" min="0" matInput [formControl]="cant" placeholder="1">
+                      <mat-error *ngIf="cant.hasError('required')">La cantidad es requerida </mat-error>
+                    </mat-form-field>
+                    <button mat-flat-button class="butom" (click)="savedata(data.hacienda_tag, data.totalStock)">Guardar</button>
+                    <button mat-flat-button style="background-color: none;" (click)="drawer.toggle()">Abministrar Motivos</button>
+                </div>
+                
+              </mat-expansion-panel>
+            </mat-accordion>
+
+            <div class="contnertabes">
+              <div class="conttablediv" [ngStyle.lt-sm]="{'width': '85%'}">
+                <div class="scrolllisttab">
+                  <table class="tbitems13" >
+                    <tr class="tritems11">
+                        <td class="tditems11">Caidos</td>
+                        <td class="tditems11">Cantidad</td>
+                        <td class="tditems11"></td>
+                    </tr>
+                    <tr class="tritems12" *ngFor="let data of arraycai">
+                        <td class="tditems12">Caido</td>
+                        <td class="tditems12">{{data.num_recu}}</td>
+                        <td class="tditems12">
+                          <button mat-icon-button ><span style="opacity: 0.6;font-size: 25px;" class="material-icons icons">clear</span></button>
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+              </div>
+              <div class="conttablediv" [ngStyle.lt-sm]="{'width': '85%'}">
+                <div class="scrolllisttab" >
+                  <table class="tbitems13">
+                    <tr class="tritems11">
+                        <td class="tditems11">Recusados</td>
+                        <td class="tditems11">Cantidad</td>
+                        <td class="tditems11"></td>
+                    </tr>
+                    <tr class="tritems12" *ngFor="let data of arrayrec">
+                        <td class="tditems12">{{data.motivo}}</td>
+                        <td class="tditems12">{{data.num_recu}}</td>
+                        <td class="tditems12" style="display: flex;flex-direction: row;">
+                          <button mat-icon-button  (click)="deletehist(data.id)"><span style="opacity: 0.6;font-size: 25px;" class="material-icons icons">clear</span></button>
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
+  </mat-drawer-content>
+</mat-drawer-container>

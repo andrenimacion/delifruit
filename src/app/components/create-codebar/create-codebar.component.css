@@ -1,0 +1,256 @@
+.color-selected {
+    width: 25px;
+    height: 52.03px;
+    border: dashed 1px gray;
+}
+
+.nshow {
+    font-size: 25px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+}
+.selectitems:hover{
+    background-color: rgb(206, 206, 206);
+}
+.codeback{
+    overflow: hidden;
+    width: auto;
+    padding: 5px;
+    background-color:#333333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.d-flex{
+    width: 90%;
+}
+.cont{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+}
+.btnint1{
+  position: fixed;
+  bottom: 40px;  
+  right: 24px;
+  z-index: 100;
+  background-color: #1c5cff;
+  transform: scale(0.5);
+transition: all ease-in .1s;
+opacity: 0;
+}
+.btnint2{
+    position: fixed;
+    bottom: 110px;  
+    right: 24px;
+    z-index: 100;
+    background-color: #333333;
+    transform: scale(0.5);
+transition: all ease-in .1s;
+opacity: 0;
+  }
+  .btnint3{
+    position: fixed;  
+    bottom: 110px;
+    right: 24px;
+    z-index: 100;
+    background-color: #e9ce03;
+    transform: scale(0.5);
+transition: all ease-in .1s;
+opacity: 0;
+  }
+  .animate1{
+      opacity: 1;
+  }
+  .iconanimateadd{
+    transition: all ease-in .3s;
+    transform: rotate(0deg);
+  }
+  .btnaddanimat{
+    transform: rotate(135deg);
+  }
+.cards{
+    overflow-x: scroll;
+    opacity: 0;
+    margin-top: 80px;
+    transition: all ease-in .3s;
+    width: 86%;
+    height: auto;
+}
+.cardaddqrcode{
+    display: none;
+    margin-top: 40px;
+    transition: all ease-in .3s;
+    width: 86%;
+    height: auto;
+    overflow-x: scroll;
+    flex-direction: column;
+}
+.addqrcode{
+    display: flex;
+}
+.animatecard{
+    opacity: 1;
+    margin-top: 25px;
+}
+.tabledlist{
+    width: calc(100% - 40px);
+    margin: 20px;
+    height: auto;
+
+}
+.trtabledl{
+    width: 100%;
+    height: 50px;
+    padding: 30px;
+    border-bottom: 1px solid #c9c9c9;
+    margin-bottom: 10px;
+}
+.titletabledl{
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+    color: #333333;
+}
+.texttabledl{
+    font-size: 16px;
+    font-weight: 400;
+}
+.trtabledl2{
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+}
+.trtabledl2:hover{
+    background-color: #eeeeee;
+}
+.pup{
+    width: 22px;
+    min-height: 22px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    background-color: #0f5bff;
+}
+.itempopup{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.printbtn{
+    width: 100%;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: rgb(116, 213, 216);
+    display: flex;
+    flex-direction: row;
+}
+.codexmaster{
+    margin: 15px;
+    width: calc(100% - 50px);
+    padding: 10px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #e3e7ee;
+    color: #333333;
+    font-size: 16px;
+    font-weight: 400;
+}
+.directioncard{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.pagediv{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.pagepage{
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+}
+.paginador{
+    margin: 10px 0px;
+}
+.titlesettings{
+    padding: 10px;
+    width: 90%;
+    font-size: 16px;
+    color: #333333;
+    font-weight: 500;
+}
+.btnsetting{
+    background-color: #333333;
+    color: white;
+    margin: 10px;
+    width: 150px;
+}
+.respons{
+    min-width: 96%;
+}
+.itemno{
+    display: none;
+}
+.cardphone{
+    width: 94%;
+}
+
+.animatebtnfixed{
+transform: scale(1);
+opacity: 1;
+}
+.menuvert{
+    width: 100%;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    margin-top: -20;
+    background-color: #1a5ef3;
+    transition: all ease-in .2s;
+}
+.menuanimation{
+    margin-top: 0px;
+    opacity: 1;
+
+}
+.leftmenu{
+    display: b;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: 500;
+    color: white;
+}
+.rigthmenu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 15px;
+}
+.rigtmenut{
+    font-size: 15px;
+    color: #f2f2f2;
+    margin-right: 5px;
+    margin-left: 20px;
+}

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ALPTABLAService } from './alptabla.service';
+import { AlptablaService } from './alptabla.service';
 
-describe('ALPTABLAService', () => {
-  let service: ALPTABLAService;
+describe('AlptablaService', () => {
+  let service: AlptablaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ALPTABLAService);
+    service = TestBed.inject(AlptablaService);
   });
 
   it('should be created', () => {

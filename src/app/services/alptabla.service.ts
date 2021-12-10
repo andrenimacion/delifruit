@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root'
 })
-export class ALPTABLAService {
+export class AlptablaService {
 
   public port: string = environment.port;
   private apiURL = `https://alp-cloud.com:${this.port}/api`;
@@ -56,7 +56,7 @@ export class ALPTABLAService {
   private arrDetMaster: any = [];
   saveDetailMaster(master: string, codecSecuence: string, nombre: string, grupo: string, hectareaje: number) {
 
-    this.arrDetMaster = {
+    this.arrDetMaster = {      
       master:  master,
       codigo:  codecSecuence,
       nombre:  nombre,
@@ -71,13 +71,20 @@ export class ALPTABLAService {
       lencod:  0.00
     }
 
+    console.log(this.arrDetMaster);
+
     return this.http.post( this.apiURL + '/control_alp_master_tabla/save_alp_master', this.arrDetMaster );
 
   }
   
-  getMaster(nomtag: string, properties: string) {  
-    return this.http.get( this.apiURL + '/control_alp_master_tabla/geMaster/' + nomtag + '/' + properties );
+  getMaster(nomtag: string, properties: string, order:string) {  
+    return this.http.get( this.apiURL + '/control_alp_master_tabla/geMaster/' + nomtag + '/' + properties + '/' + order);
   }
+  getMaster2(master: string) {  
+    return this.http.get( this.apiURL + '/control_alp_master_tabla/getLotesByHac/' + master);
+  }
+
+
   //control_alp_master_tabla/delMasterData/PRUE_MASTER/001
   delLotes(master: string, codec: string) {
     return this.http.get( this.apiURL + '/control_alp_master_tabla/delMasterData/' + master + '/' + codec);
@@ -92,5 +99,4 @@ export class ALPTABLAService {
     // return this.http.get('https://alp-cloud.com:8430/api/control_alp_master_tabla/FilterDataModuleGBarCode/de/c');
     return this.http.get( this.apiURL + '/control_alp_master_tabla/FilterDataModuleGBarCode/' + data + '/'  + opt);
   }
-
 }
