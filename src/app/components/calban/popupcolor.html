@@ -1,6 +1,0 @@
-<div class="cont">
-  <div class="conttitle">Lista de colores</div>
-  <div class="contcolors">
-    <div class="color" *ngFor="let x of data" (click)="selectcolor(x.hex_cod_color, x.name_labor)" [ngStyle]="{'background-color': x.hex_cod_color}">{{x.name_labor}}</div>
-  </div>
-</div>
