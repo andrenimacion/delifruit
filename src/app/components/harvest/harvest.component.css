@@ -1,0 +1,254 @@
+.cont{
+    width: 100%;
+    min-height: 300px;
+    max-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    background-color: whitesmoke;
+    transition: all ease-out .2s;
+}
+.btnnext{
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    background-color: #1c5cff;
+}
+.iconnext{
+    color: white;
+}
+.btnlist{
+    position: fixed;
+    right: 15px;
+    bottom: 80px;
+    background-color: #19b934;
+}
+.divharvest{
+    width: 90%;
+    background-color: white;
+    padding-bottom: 25px;
+    border-radius: 6px;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    opacity: 0;
+    z-index: 15;
+    margin-top: 80px;
+    transition: all ease-out .3s;
+    animation: addcolora .4s ease-out both;
+    }
+    @keyframes addcolora {
+        to{
+            margin-top: 30px;
+            opacity: 1;
+        }
+    }
+    .titleharvest{
+        padding: 10px;
+        padding-left: 20px;
+        font-size: 18px;
+        color: #333333;
+        font-weight: 500;
+        margin-top: 25px;
+    }
+    .contdivsearch{
+        width: calc(100% - 50px);
+        padding: 0px 25px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: relative;
+    }
+    .divsearch{
+        width: calc(100% - 80px);
+        height: 55px;
+    }
+    .divconteo{
+        width: 74px;
+        height: 42px;
+        background-color: #1c5cff;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        font-size: 18px;
+        color: white;
+        font-weight: 500;
+        border-radius: 5px;
+    }
+    .maxsize{
+        font-size: 28px;
+    }
+    .input{
+        width: 100%;
+    }
+    .divbtn{
+        width: calc(100% - 50px);
+        padding: 0px 25px;
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+    }
+    .btnprimary{
+        background-color: rgb(52, 83, 255);
+        color: white;
+        margin-top: 5px;
+        margin-right: 8px;
+        font-size: 13px;
+        font-weight: 400;
+        margin-left: -20px;
+        opacity: 0;
+        animation: btnsa .3s .1s ease-out both;
+     }
+     .btnsecondary{
+        background-color: rgb(49, 49, 49);
+        color: white;
+        margin-top: 5px;
+        font-size: 13px;
+        margin-right: 6px;
+        font-weight: 400;
+        margin-left: -20px;
+        opacity: 0;
+        animation: btnsa .3s .2s ease-out both;
+     }
+     .btnthree{
+        margin-top: 5px;
+        font-size: 14px;
+        margin-left: -20px;
+        opacity: 0;
+        animation: btnsa .3s .3s ease-out both;
+    }
+    @keyframes btnsa {
+        to{
+            margin-left: 0px;
+            opacity: 1;
+        }
+    }
+    .mtabla{
+        opacity: 0;
+        margin-top: 80px;
+        margin-bottom: 20px;
+        animation: addcolora .4s .2s ease-out both;
+        }
+        @keyframes addcolora {
+            to{
+                margin-top: 30px;
+                opacity: 1;
+            }
+        }
+        .itemsearch{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            cursor: pointer;
+            min-height: 50px;
+            max-height: 50px;
+        }
+        .textitem{
+            max-width: 60px;
+            padding: 3px 10px;
+            margin-left: 20px;
+            margin-right: 10px;
+            background-color: #1c5cff;
+            color: white;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+.results{
+    position: absolute;
+    top: 55px;
+    left: 0px;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: scroll;
+    background: rgb(255, 255, 255);
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+}
+.searchinput{
+    width: 100%;
+    margin-bottom: -19px;
+}
+.loading{
+    width: 100%;
+}
+.item{    
+    opacity: 0;
+    animation-name: itemsa;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+@keyframes itemsa {
+    to{
+        opacity: 1;
+    }
+}
+.opacity_line{
+    border-top: 0px solid transparent !important;
+}
+.cont_q{
+    position: fixed;
+    width: 200px;
+    height: 60px;
+    background-color: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.35);
+    bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    left: 0px;
+    z-index: 630;
+    animation: cont_q .3s ease-out .2s both;
+}
+@keyframes cont_q {
+    to{
+        left: 20px;
+        opacity: 1;
+    }
+}
+.btn_q{
+    background-color: #1c5cff;
+    width: 80px;
+    color: white;
+    height: 35px;
+}
+.mthead{
+    min-width: 730px;
+}
+.mtbody{
+    min-width: 730px;
+}
+.cinput_q{
+    width: calc(100% - 120px);
+    height: 35px;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 15px;
+    color: #333333;
+    font-weight: 500;
+}
+.mw170{
+    min-width: 160px;
+    overflow: hidden;
+    padding: 0px 10px;
+}
+.mw100{
+    width: 90px;
+    min-width: 90px;
+    overflow: hidden;
+}

@@ -1,0 +1,30 @@
+<div class="cont">
+    <div class="formdiv" [ngStyle.lt-sm]="{'width' : '80%'}">
+        <div class="logo">
+            <img src="../../assets/logotipo/part1_logo.png" style="width: auto; height: 100px;">
+            <img src="../../assets/logotipo/part2_logo.png" style="width: auto; height: 100px;">
+        </div>
+        <div class="form">
+            <div class="title">Syscompsa</div>
+            <form [formGroup]="formlogin" style="width: 100%;">
+                <mat-form-field class="inputsh">
+                    <mat-label style="color: rgb(208, 208, 208);">Usuario</mat-label>
+                    <input type="text" class="textinput" matInput formControlName="WebUsu" placeholder="Administrador">
+                    <mat-error *ngIf="formlogin.controls['WebUsu'].hasError('required')">El usuario es requerida </mat-error>
+                </mat-form-field>
+                <mat-form-field class="inputsh">
+                    <mat-label style="color: rgb(208, 208, 208);">Contraseña</mat-label>
+                    <input [type]="hide ? 'password' : 'text'" class="textinput" (keyup.enter)="logeo()" matInput formControlName="WebPass" placeholder="123456">
+                    <mat-error *ngIf="formlogin.controls['WebPass'].hasError('required')">La contraseña es requerida </mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                </mat-form-field>
+                <button mat-flat-button class="btnlogin" (click)="logeo()">
+                    <mat-spinner [diameter]="25" class="loading" *ngIf="loading"></mat-spinner>
+                    <span *ngIf="!loading">Ingresar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

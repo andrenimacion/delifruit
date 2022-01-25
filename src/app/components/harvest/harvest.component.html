@@ -1,0 +1,65 @@
+<div class="cont" id="tab">
+  <div class="cont_q" *ngIf="h_developer">
+    <input type="number" class="cinput_q" placeholder="0" id="h_developer">
+    <button mat-button class="btn_q" (click)="change_q()">Insertar</button>
+  </div>
+    <div class="divharvest">
+      <mat-progress-bar mode="query" *ngIf="loading" class="loading"></mat-progress-bar>
+        <div class="titleharvest">Cosecha</div>
+        <div class="contdivsearch"> 
+            <div class="divsearch">
+                <mat-form-field class="input">
+                    <mat-label>Num. lote</mat-label>
+                    <input id="input-code" (keyup.enter)="contador()" id="input-code" value="" matInput [placeholder]="placeholder" required>
+                    <mat-icon matSuffix>qr_code_scanner</mat-icon>
+                  </mat-form-field>
+                  <div class="results">
+                    <div class="itemsearch" *ngFor="let data of arrLotes" matRipple (click)="selectcode(data.hacienda_tag,data)">
+                        <div class="textitem">Lote {{selectlot(data.codec_lotes)}}</div>
+                        <div class="textsearch"><strong>Deli {{selectdeli(data.codec_lotes)}}/</strong> {{data.hacienda_tag}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="divconteo"><div class="maxsize">{{Global_cont}}</div>/{{Global_total_2}}</div>
+        </div>
+        <div class="divbtn">
+            <button *ngIf="Global_total" (click)="save()" mat-raised-button class="btnprimary">Guardar</button>
+            <button *ngIf="Global_total" (click)="manualingress()" mat-raised-button class="btnsecondary">Ingreso manual</button>
+            <button *ngIf="Global_total" (click)="resetdata()" class="btnthree" mat-button>Resetear</button>
+        </div>
+    </div>
+    <div class="mtabla" [class.opacity_line]="loading_tab">
+      <mat-progress-bar *ngIf="loading_tab" mode="query"></mat-progress-bar>
+        <div class="mheader">
+          <div class="mhtitle"><span class="material-icons icontitle">spa</span>Lista de Cosechas</div>
+          <!-- Aqui iria algun boton o tipo de orden -->
+        </div>
+        <div class="mbody">
+            <div class="mthead"> 
+              <div class="mthtitle noselect mw170" style="width: 180px;" (click)="changeorder('lote_prod')">Lote Produccion<span id="lote_prod" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw100" (click)="changeorder('cod_hacienda')">Lote<span id="cod_hacienda" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw100" (click)="changeorder('semana')">Semana<span id="semana" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw100" (click)="changeorder('cortes')">Stock Total<span id="cortes" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw100" (click)="changeorder('cant_cosecha')">Cosecha Total<span id="cant_cosecha" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw100" (click)="changeorder('f_cosecha')">Fecha<span id="f_cosecha" class="material-icons iconord"></span></div>
+            </div>
+            <div class="mtbody">
+              <div class="item"  *ngFor="let data of arrharvest;index as i" [ngStyle]="{'animation-delay' : i/15+'s'}">
+                <div class="subitem" matRipple>
+                  <div class="mthtitle mw170" style="justify-content: start;">{{data.lote_prod}}</div>
+                  <div class="mthtitle mw100">{{data.cod_hacienda}}</div>
+                  <div class="mthtitle mw100">{{data.semana}}</div>
+                  <div class="mthtitle mw100">{{data.cortes}}</div>
+                  <div class="mthtitle mw100">{{data.cant_cosecha}}</div>
+                  <div class="mthtitle mw100" (click)="showdate($event, data.f_cosecha)">{{ data.f_cosecha | date: 'shortDate' }}</div>
+                </div>
+                <button mat-icon-button  (click)="delete(data.id, data.lote_prod)" class="btncelar"><mat-icon class="iconbtnm">clear</mat-icon> </button>
+              </div>
+            </div>
+          </div>
+          <!-- Aqui iria algun sub body -->
+        <div class=""></div>
+      </div>
+    <button mat-fab class="btnlist" *ngIf="Global_cont" (click)="select_fallen()" aria-label="Example icon button with a delete icon"><mat-icon class="iconnext" [matBadge]="Global_cai" matBadgeColor="warn">list</mat-icon> </button>
+    <button mat-fab class="btnnext" (click)="nexttab()" aria-label="Example icon button with a delete icon"><mat-icon class="iconnext">error_outline</mat-icon> </button>
+</div>

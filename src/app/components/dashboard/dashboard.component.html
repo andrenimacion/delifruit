@@ -1,0 +1,25 @@
+<div class="cont">
+    <div class="header">
+            <div class="headeranit">
+                <div (click)="info()" [ngClass]="{'itemcont': state, 'itemcont0' : !state }">
+                    <span class="material-icons">{{icon}}</span>
+                    <div class="titletext iconord" >
+                        <div class="textdashboard">{{title_header | titlecase}}</div>
+                        <div class="textversion" *ngIf="!state">V{{version}}</div>
+                    </div>
+                </div>
+                <div class="itemcont2" (click)="changedash()">
+                    <span class="material-icons">dashboard</span>
+                    <div class="titletext iconord">Dashboard</div>
+                </div>
+            </div>
+            <div class="rigthmenu">
+                <div class="rigtmenut" [ngStyle.lt-sm]="{'display' : 'none'}">Bienvenido, <span style="font-weight: 500;"> {{ user | titlecase }} </span></div>
+                <button (click)="logout()" mat-icon-button><mat-icon style="color: white;">logout</mat-icon></button>
+            </div>
+    </div>
+    <div class="body">
+        <mat-progress-bar mode="query" class="loading" *ngIf="loading"></mat-progress-bar>
+        <router-outlet name="home"></router-outlet>
+    </div>
+</div>

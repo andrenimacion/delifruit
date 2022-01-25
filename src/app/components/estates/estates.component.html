@@ -1,0 +1,75 @@
+<div class="cont" id="tab">
+    <div class="conttables">
+        <mat-accordion class="addc">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="d-flex align-items-center" >
+                   <mat-icon>settings_suggest</mat-icon> Crear una hacienda:
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+              <div class="container-fluid" >
+                  
+                <div class="d-flex justify-content-between flex-wrap ">
+                    <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                        <mat-label>Nombre hacienda:</mat-label>
+                        <input matInput placeholder="" [(ngModel)]="_name_hacienda" (keyup)=" gcodec(_name_hacienda) " >
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                        <mat-label>Código hacienda:</mat-label>
+                        <input matInput placeholder="" disabled [(ngModel)]="_cod_hacienda" >
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width d-flex flex-wrap" appearance="fill">
+                        <mat-label>#Tag:</mat-label>
+                        <input matInput disabled placeholder="" [(ngModel)]="_nomtag_hacienda" >
+                    </mat-form-field>                        
+                </div>
+
+                <div class="d-flex" >
+                    <button mat-raised-button class="btnaddh"  (click)="sHacienda(_cod_hacienda,    _name_hacienda, _nomtag_hacienda, 'JOR')"><mat-icon style="color: white;">add</mat-icon> Crear</button>
+                </div>
+
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        <div class="contab" [ngStyle.lt-sm]="{'min-width': '90%','margin':'20px 5%' }" *ngFor="let xa of ArrHaciendas" (click)="dataPersist('name_hacienda', xa.nombre, 'codec_hacienda', xa.codigo, 'nom_tag', xa.nomtag)">
+            <div class="linertabd"></div>
+            <div class="titletab">
+                <div class="titletabtxt">
+                    <mat-icon class="icontitletab"> gite</mat-icon> 
+                    <input type="text" [id]="xa.id" class="inputname" [value]="xa.nombre" disabled>
+                </div>
+                <div class="contibtns">
+                      <button mat-icon-button><mat-icon class="iconsetti" (click)="deletei(xa.id)">clear</mat-icon>
+                      </button>
+                </div>
+            </div>
+            <div class="conttable">
+                <div class="theader">
+                    <div class="itmsm">Codigo</div>
+                    <div class="itmsm">Nombre</div>
+                    <div class="itmsm">Hacienda</div>
+                </div>
+                <div class="tbody">
+                    <div class="item" *ngFor="let xe of xa.objeto">
+                        <div class="subitem" matRipple>
+                            <div class="itmsi">{{xe.codigo}}</div>
+                            <div class="itmsi">{{xe.nombre}}</div>
+                            <div class="itmsi">{{xe.valor}}</div>
+                        </div>
+                        <button mat-icon-button class="btndelete"><mat-icon class="icondelete" (click)="deletelot(xe.id)">clear</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+            <div class="titletab">
+                <button mat-raised-button class="btnadd" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="addlot( xa.nombre )">Agregar</button>
+                <div class="divrigthtol" *ngIf="xa.objeto">
+                    <div class="endtable">Total hect:</div>
+                     <div class="endtable2" >{{xa.total}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button mat-fab class="btnnext" (click)="nexttab()"><mat-icon class="iconnext">qr_code_2</mat-icon>
+    </button>
+</div>

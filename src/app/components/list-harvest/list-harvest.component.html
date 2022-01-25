@@ -1,0 +1,18 @@
+<div class="cont">
+    <div class="title"><span class="material-icons icontitle">error_outline</span>Lista de Cosecha</div> 
+    <div class="listitems">
+        <div class="item" matRipple *ngFor="let x of arr" [class.backgroundcolor]="x.state" (click)="selectitem(x.codigo)">
+            <div class="anioit" [class.textcolor]="x.state">{{x.codigo}}</div>
+            <img class="imageqr" [src]="generate_codeqr(x.codigo)"/>
+            <div matRipple class="headeritem">
+                <div class="text" [class.textcolor]="x.state">Deli {{hacienda}}/Lote {{lote}}</div>
+                <div class="text" [class.textcolor]="x.state">{{tag}}{{x.codigo}}</div>
+                <div class="text" [class.textcolor]="x.state">{{x.date | date: 'medium'}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="btn">
+        <button mat-raised-button class="btnacep" (click)="closed()">Cerrar</button>
+        <div class="textcont">Tienes <strong>{{caidos}}</strong> Caidos</div>
+    </div>
+</div> 

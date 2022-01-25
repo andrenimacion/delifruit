@@ -1,0 +1,67 @@
+<div class="contener" id="tab">
+      <mat-card class="carditems" [ngStyle.xs]="{'max-width' : '70%'}">
+        <div matRipple id="btncolorselect" (click)="gcolor()" class="btnselectcolor" mat-button  [ngStyle.xs]="{'width' : '100%'}">Selecione un color</div>
+        <mat-form-field class="inputscolors" appearance="fill" [ngStyle.xs]="{'width' : '100%'}">
+            <mat-label>Año</mat-label>
+            <input matInput placeholder="" type="number" [(ngModel)]="_periodo" >
+        </mat-form-field>
+        <mat-form-field class="inputscolors" appearance="fill"  [ngStyle.xs]="{'width' : '100%'}">
+            <mat-label>Semana</mat-label>
+            <input matInput placeholder="" [(ngModel)]="_semana" >
+        </mat-form-field> 
+        <mat-form-field appearance="fill" class="inputscolors"  [ngStyle.xs]="{'width' : '100%'}">
+            <mat-label>Rango de fechas:</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker">
+              <input matStartDate placeholder="Start date" [(ngModel)]="_startDate" >
+              <input matEndDate   placeholder="End date"   [(ngModel)]="_endDate"   >
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker>
+              <mat-date-range-picker-actions>
+                <button mat-button matDateRangePickerCancel>Cancelar</button>
+                <button mat-raised-button color="primary" matDateRangePickerApply>Aplicar</button>
+              </mat-date-range-picker-actions>
+            </mat-date-range-picker>
+          </mat-form-field>
+          <div style="width: 100%;margin-top: 10px;">
+            <button (click)="sDP08ACAL(_startDate, _endDate )" style="background-color: #1a5ef3; color: white;" mat-raised-button>Crear</button>
+        </div>
+      </mat-card>
+      <div class="mtabla">
+        <div class="mheader">
+          <div class="mhtitle"><span class="material-icons icontitle">event_available</span>Semanas</div>
+          <mat-form-field class="selectanio">
+            <mat-label>Selecione Año</mat-label>
+            <mat-select [formControl]="anio">
+              <mat-option *ngFor="let anio of anios" (click)="gDP08ACAL()"[value]="anio">
+                {{anio}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="mtabled">
+          <div class="mthead">
+            <div class="mthtitle noselect color_title" id="color_asign" (click)="changeorder('color_asign', 'Color')">Color</div>
+            <div class="mthtitle noselect color_title" id="anio" (click)="changeorder('anio', 'Año')">Año</div>
+            <div class="mthtitle noselect color_title" id="sema" (click)="changeorder('sema', 'Semana')">Semana</div>
+            <div class="mthtitle noselect color_title" id="finicio" (click)="changeorder('finicio', 'F. Inicio')">F. Inicio</div>
+            <div class="mthtitle noselect color_title" id="ffin" (click)="changeorder('ffin', 'F. Final')">F. Final</div>
+          </div>
+          <div class="mtbody">
+            <div class="item"  *ngFor="let data of arrDp08acal; index as e">
+              <div class="subitem" matRipple>
+                <div class="mthtitle"><div [ngStyle]="{'background-color': data.color_asign}" class="colormuestraitem"></div></div>
+                <div class="mthtitle">{{ data.anio  }}</div>
+                <div class="mthtitle">{{ data.sema }}</div>
+                <div class="mthtitle">{{ data.finicio | date: 'd/M/yy'}}</div>
+                <div class="mthtitle">{{ data.ffin | date: 'd/M/yy'}}</div>
+              </div>
+              <button (click)="delDP08ACAL(data.anio, data.peri, data.sema)" mat-icon-button class="btncelar"><mat-icon class="iconbtnm">clear</mat-icon> </button>
+            </div>
+          </div>
+        </div>
+        <div class=""></div>
+      </div>
+    
+    <button (click)="nexttab()" mat-fab class="itemnextpage" color="primary" aria-label="Example icon button with a delete icon"><mat-icon> warehouse</mat-icon></button>
+</div>

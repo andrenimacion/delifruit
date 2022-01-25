@@ -1,0 +1,8 @@
+<div class="contitem" [class.exit]="exit">
+    <div *ngFor="let x of items;index as i" (click)="selectitem(x)" [class]="'item anit'+i" matRipple>
+       <div class="conticon"><mat-icon class="iconm">{{x.icon_module}}</mat-icon></div>
+        <p class="texti">
+            {{ x.name_module }}
+        </p>
+    </div>
+</div>

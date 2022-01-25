@@ -1,0 +1,193 @@
+<div class="cont" id="tab">
+    <div class="contsearch" ngClass.lt-sm="contsearchph">
+        <div class="continlo">
+            <mat-progress-bar mode="query" *ngIf="loading_search"></mat-progress-bar>
+            <mat-form-field class="searchinput" appearance="fill">
+                <mat-label>Num. lote</mat-label>
+                <input id="input-code" (keyup.enter)="search()" matInput placeholder="ABC123" required>
+                <mat-icon matSuffix>qr_code_scanner</mat-icon>
+              </mat-form-field>
+        </div>
+        <div class="results">
+            <div class="aitemsa" *ngFor="let data of arrLotes" matRipple (click)="selectdev(data)">
+                <div class="textitema">Lote {{selectlot(data.codec_lotes)}}</div>
+                <div class="textsearch"><strong>Deli {{selectdeli(data.codec_lotes)}}/</strong> {{data.hacienda_tag}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardphone" *ngFor="let data of arrDev" [ngStyle.lt-sm]="{'display' : 'flex'}">
+        <div class="seccions"><span class="title">Lote: </span><span class="text"> DELI {{selectdeli(data.codec_lotes)}}/LOTE {{selectlot(data.codec_lotes)}}</span> </div>
+        <div class="seccions"><span class="title">Cantidad: </span><span class="text">{{data.cantidad}}</span> </div>
+        <div class="seccions"><span class="title">Cant. Devolucion: </span>
+            <div class="continput" style="margin: 0px;">
+                <div matRipple (click)="aument(1, data.cantidad)" class="aumentadores" style="opacity: 1;">+</div>
+                <input type="number" (changes)="aument(2, data.cantidad)" (keyup)="aument(2, data.cantidad)" [(ngModel)]="cantarest" class="inputnumber">
+                <div matRipple (click)="aument(0, data.cantidad)"  class="aumentadores"  style="opacity: 1;">-</div>
+            </div>
+        </div>
+        <div class="seccions"><span class="title">Total: </span><span class="totalnum" style="font-weight: 500;color: rgb(17, 218, 74);font-size: 17px;">{{ data.cantidad + cantarest }}</span> </div>
+        <div class="seccions"><span class="title">Motivo: </span><textarea type="text" placeholder="Escribe el motivo aqui" id="motives1" class="textareaint" [value]=""></textarea></div>
+       <button mat-raised-button class="butons" (click)="save_dev(data, 'motives1')" style="width: 100px;display: flex;margin-top: 20px;">Guardar</button>
+    </div>
+    <table class="tbitems1" *ngIf="arrDev[0] != null" [ngStyle.xs]="{'display' : 'none'}">
+        <tr class="tritems11">
+            <td class="tditems11">Lote</td>
+            <td class="tditems11">Cantidad</td>
+            <td class="tditems11">Cant. Devolucion</td>
+            <td class="tditems11">Total</td>
+            <td class="tditems11">Motivo</td>
+            <td class="tditems11"></td>
+        </tr>
+        <tr class="tritems12" *ngFor="let data of arrDev; index as i">
+           <td class="tditems12"> DELI {{selectdeli(data.codec_lotes)}}/LOTE {{selectlot(data.codec_lotes)}} </td>
+           <td class="tditems12">{{data.cantidad}}</td>
+           <td class="tditems12" >
+               <div class="continput">
+                   <div matRipple (click)="aument(0, data.cantidad)" class="aumentadores"  style="opacity: 1;">-</div>
+                   <input type="number" (changes)="aument(2, data.cantidad)" (keyup)="aument(2, data.cantidad)" [(ngModel)]="cantarest" class="inputnumber">
+                   <div matRipple (click)="aument(1, data.cantidad)"  class="aumentadores"  style="opacity: 1;">+</div>
+               </div>
+           </td>
+           <td class="tditems12"  style="font-weight: 500;color: rgb(17, 218, 74);font-size: 17px;">{{ data.cantidad + cantarest }}</td>
+           <td class="tditems12">
+               <mat-form-field class="inputtextarea1" appearance="fill"> 
+               <textarea matInput id="motives1"  placeholder="Escriba el motivo aqui..." id="motives0"></textarea>
+             </mat-form-field></td>
+           <td class="tditems12" style="height: 55px;"><button style="margin-right: 10px;" mat-icon-button class="btnicon" (click)="save_dev(data, 'motives0')" ><span class="iconst material-icons">save</span></button></td>
+       </tr>
+    </table>
+    <div class="mtabla" [ngStyle.lt-sm]="{'width' : '96%'}" [class.opacity_line]="loading_tab">
+      <mat-progress-bar *ngIf="loading_tab" mode="query"></mat-progress-bar>
+        <div class="mheader">
+          <div class="mhtitle"><span class="material-icons icontitle">rule</span>Sobrante y devoluciones</div>
+          <!-- Aqui iria algun boton o tipo de orden -->
+        </div>
+        <div class="pht_body" [ngStyle.lt-sm]="{'display' : 'flex'}">
+          <div class="phtb_head">
+              <div class="phtb_head">
+                  <div class="phtbh_title">Codigo</div>
+                  <div class="phtbh_title" style="width: 30%;">Cantidad</div>
+              </div>
+          </div>
+          <div class="phtb_body">
+            <div class="iitem" *ngIf="!list_dev[0]"> No hay codigos disponibles       </div>
+              <div class="phtbb_item" *ngFor="let data of list_dev;index as i"  id="d-1-{{data.lote_prod}}-{{i}}">
+                  <div class="phtbb_subitem">
+                      <div class="phtbbs_line1 uniwidth" matRipple (click)="view(data.lote_prod, i)">
+                          <div class="phtbbsl_title st_title">{{ data.lote_prod }}</div>
+                          <div class="phtbbsl_title st_cant">
+                              <input type="text" id="i-1-{{data.lote_prod}}-{{i}}" value="false" class="statediv">
+                              <input type="text" id="v-1-{{data.lote_prod}}-{{i}}" value="false" class="statediv">
+                              <div class="phtbbsl_cant" id="a-1-{{data.lote_prod}}-{{i}}">{{return_neg(data.cant_dev)}}</div>
+                          </div>
+                      </div>
+                      <div class="phtbbs_line1" style="height: 35px;">
+                          <div class="phtbbsl_title st_title">Enfunde:</div>
+                          <div class="phtbbsl_title st_cant">{{ data.cant }}</div>
+                      </div>
+                      <div class="phtbbs_line1" style="height: 35px;">
+                          <div class="phtbbsl_title st_title">Devolucion:</div>
+                          <div class="phtbbsl_edit">
+                              <div matRipple (click)="insercant(data.lote_prod, 1, i, data.cant, '1')" id="me-1-{{data.lote_prod}}-{{i}}" class="aumentadores2">-</div>
+                              <input type="number" class="inputnumber2" id="input-1-{{data.lote_prod}}-{{i}}" (changes)="insercant(data.lote_prod, 2, i, data.cant, '1')" (keyup)="insercant(data.lote_prod, 2,i, data.cant, '1')" [value]="-data.cant_dev" disabled>
+                              <div matRipple (click)="insercant(data.lote_prod, 0, i, data.cant, '1')" id="ma-1-{{data.lote_prod}}-{{i}}" class="aumentadores2">+</div>
+                          </div>
+                      </div>
+                      <div class="phtbbs_line1" style="height: 35px;">
+                          <div class="phtbbsl_title st_title">Total:</div>
+                          <div class="phtbbsl_title st_cant" id="total-1-{{data.lote_prod}}-{{i}}">{{ data.total }}</div>
+                      </div>
+                      <div class="phtbbs_line1" style="height: 35px;">
+                          <div class="phtbbsl_title st_title">Fecha:</div>
+                          <div class="phtbbsl_title st_cant">{{ data.ffin  | date: 'shortDate' }}</div>
+                      </div>
+                      <div class="phtbbs_line1" style="height: 50px;padding-bottom: 10px;">
+                          <div class="phtbbsl_title st_title" style="width: 20%;">Motivo:</div>
+                          <div class="phtbbsl_title st_cant" style="width: 60%;text-align: end;">
+                              <textarea class="phtbbsl_textarea" id="t-1-{{data.lote_prod}}-{{i}}" disabled>{{ data.observ_dev }}</textarea>
+                          </div>
+                      </div>
+                  </div>
+                  <button class="phtbb_btn" id="c-1-{{data.lote_prod}}-{{i}}" (click)="delete_item(data.lote_prod, data.campo)" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                      <mat-icon class="phtbbb_icon">clear</mat-icon>
+                    </button>
+                    <button class="phtbb_btn" id="e-1-{{data.lote_prod}}-{{i}}" (click)="edit_item(data.lote_prod, i, data, 'input', '1')" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                      <mat-icon  class="phtbbb_icon" id="ic-1-{{data.lote_prod}}-{{i}}">edit</mat-icon>
+                    </button>
+              </div>
+          </div>
+      </div>
+        <div class="mbody" [ngStyle.lt-sm]="{'display' : 'none'}">
+            <div class="mthead">
+              <div class="mthtitle noselect mw180" style="justify-content: center;" (click)="changeorder('lote_prod')">Lote Produccion<span id="lote_prod" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw50" (click)="changeorder('campo')">Lote<span id="campo" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw50" (click)="changeorder('campoB')">Semana<span id="campoB" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw50" (click)="changeorder('cant')">Cant. Enfunde<span id="cant" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw80" (click)="changeorder('observ_dev')">Cant. Devolucion<span id="observ_dev" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw50" (click)="changeorder('total')">Cant. Sobrante<span id="total" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw110" (click)="changeorder('observ_dev')">Motivo<span id="observ_dev" class="material-icons iconord"></span></div>
+              <div class="mthtitle noselect mw80" (click)="changeorder('ffin')">Devolución<span id="ffin" class="material-icons iconord"></span></div>
+            </div>
+            <div class="mtbody"> 
+              <div class="iitem" *ngIf="!list_dev[0]">
+                No hay codigos disponibles
+              </div>
+              <div class="item"  *ngFor="let data of list_dev | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };index as i" [ngStyle]="{'animation-delay' : i/15+'s'}" >
+                <div class="subitem" matRipple>
+                  <div class="mthtitle mw180"  style="justify-content: start;">{{ data.lote_prod }}</div>
+                  <div class="mthtitle mw50">{{ data.campo }}</div>
+                  <div class="mthtitle mw50">{{ data.campoB }}</div>
+                  <div class="mthtitle mw50">{{ data.cant }}</div>
+                  <div class="mthtitle mw80"> 
+                    <div class="continput">
+                        <div matRipple (click)="insercant(data.lote_prod, 1, i, data.cant, '0')" class="aumentadores">-</div>
+                        <input type="number" id="input-0-{{data.lote_prod}}-{{i}}" (changes)="insercant(data.lote_prod, 2, i, data.cant, '0')" (keyup)="insercant(data.lote_prod, 2,i, data.cant, '0')" [value]="-data.cant_dev"  class="inputnumber">
+                        <div matRipple (click)="insercant(data.lote_prod, 0, i, data.cant, '0')"  class="aumentadores">+</div>
+                    </div>
+                  </div>
+                  <div class="mthtitle mw50" id="total-0-{{data.lote_prod}}-{{i}}">{{ data.total }}</div>
+                  <div class="mthtitle mw110">
+                    <textarea class="maotivevalue" id="text-0-{{data.lote_prod}}-{{i}}" disabled>{{ data.observ_dev }}</textarea>
+                  </div>
+                  <div class="mthtitle mw80"(click)="showdate($event, data.ffin)">{{ data.ffin | date: 'shortDate' }}</div>
+                </div>
+                <button mat-icon-button (click)="update_dev(data, i, 'input', '0')" [value]="data.cant_dev" id="save-{{data.lote_prod}}-{{i}}" class="btnreport"><mat-icon class="iconreport">save</mat-icon> </button>
+                <button mat-icon-button (click)="delete_dev(data.lote_prod, data.campo)" class="btncelar"><mat-icon class="iconbtnm">clear</mat-icon> </button>
+              </div>
+            </div> 
+          </div>
+          <div class="subheader" [ngStyle.lt-sm]="{'display' : 'none'}" *ngIf="list_dev[0]">
+            <div class="leftiv">
+              <div class="contpag">
+                <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>  
+              </div> 
+            </div> 
+            <div class="rigths">
+              <div class="namepag">Paguina:</div> 
+                <input type="number" [(ngModel)]="currentPage" class="cantidad">           
+            </div> 
+          </div> 
+      </div>
+      <!-- <div class="scrollitemslist" [ngStyle.lt-sm]="{'display' : 'flex'}">
+        <div class="itemslist" *ngFor="let data of list_dev; index as i">
+            <button mat-icon-button (click)="delete_dev(data.lote_prod, data.campo)" class="btnclearitem"><span style="color: white;" class="iconst material-icons">clear</span></button>
+            <div class="seccions"><span class="titleitem">Devolución: </span><span class="textitem">{{ data.ffin  | date: 'short' }}</span> </div>
+            <div class="seccions"><span class="titleitem">Des. Lote: </span><span class="textitem">{{ data.nom_lote }} </span> </div>
+            <div class="seccions"><span class="titleitem">Motivo: </span><span class="textitem">{{ data.observ_dev }}</span> </div>
+            <div class="seccions"><span class="titleitem">Lote prod.: </span><span class="textitem">{{ data.lote_prod }}</span> </div>
+            <div class="seccions"><span class="titleitem">Cant. enfunde: </span><span class="textitem">{{ data.cant }}</span> </div>
+            <div class="seccions">
+                <span class="titleitem">Cant. Dev.: </span>
+                <div class="continput" style="margin: 0PX;">
+                   <div matRipple (click)="insercant(data.lote_prod, 1, i, data.cant, '1')" class="aumentadores">-</div>
+                   <input type="number" id="input-1-{{data.lote_prod}}-{{i}}" (changes)="insercant(data.lote_prod, 2, i, data.cant, '1')" (keyup)="insercant(data.lote_prod, 2,i, data.cant, '1')" [value]="-data.cant_dev"  class="inputnumber">
+                   <div matRipple (click)="insercant(data.lote_prod, 0, i, data.cant, '1')"  class="aumentadores">+</div>
+               </div>
+           </div>
+           <div class="seccions"><span class="titleitem">Cant. Sob.: </span><span  style="font-weight: 500;color: rgb(22, 255, 88);font-size: 17px;" id="total-1-{{data.lote_prod}}-{{i}}" class="text">{{ data.total }}</span> </div>
+           <button id="btnsave-{{data.lote_prod}}-{{i}}" mat-raised-button class="butons" (click)="update_dev(data, i, 'input', '1')">Guardar</button>
+        </div>
+     </div> -->
+    <button mat-fab class="btnnext" (click)="nexttab()" aria-label="Example icon button with a delete icon"><mat-icon class="iconnext">spa</mat-icon> </button>
+</div>

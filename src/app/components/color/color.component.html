@@ -1,0 +1,40 @@
+<div class="cont" ngClass.lt-sm="conph" id="tab">
+    <form class="addcolor" [formGroup]="add_color_form" ngClass.lt-sm="addcolorph">
+        <div class="incolor" id="divcolor">{{name_color}}
+            <input type="color" (change)="changecolor($event)" class="inputselectc" formControlName="color">
+        </div>
+        <mat-form-field class="inputname">
+            <mat-label>Nombre del color</mat-label>
+            <input matInput type="text" [placeholder]="name_color" (keyup)="changename()" class="inputcolor" formControlName="name">
+        </mat-form-field>
+        <button mat-flat-button class="btnaddcolor" (click)="savecolor()">Crear</button>
+    </form>
+
+    <div class="mtabla settingtable" ngClass.lt-sm="addcolorph">
+        <div class="mheader">
+          <div class="mhtitle"><span class="material-icons icontitle">water_drop</span>Colores</div>
+          <!-- Aqui iria algun boton o tipo de orden -->
+        </div>
+        <div class="mbody">
+            <div class="mthead">
+              <div class="mthtitle" (click)="changeorder('hex_cod_color')">Color<span id="hex_cod_color" class="material-icons iconord"></span></div>
+              <div class="mthtitle" (click)="changeorder('name_labor')">Nombre<span id="name_labor" class="material-icons iconord"></span></div>
+            </div>
+            <div class="mtbody">
+              <div class="item" *ngFor="let data of arrcolors; index as e">
+                <div class="subitem" matRipple>
+                  <div class="mthtitle"><div [ngStyle]="{'background': data.hex_cod_color}" class="colormuestraitem"></div></div>
+                  <div class="mthtitle">{{data.name_labor}}</div>
+                </div>
+                <button mat-icon-button class="btncelar" (click)="deletecolor(data)"><mat-icon class="iconbtnm">clear</mat-icon> </button>
+              </div>
+            </div>
+          </div>
+          <!-- Aqui iria algun sub body -->
+        <div class=""></div>
+      </div>
+      <button mat-fab class="btnnext" (click)="nexttab()"><mat-icon class="iconnext">event</mat-icon>
+      </button>
+</div>
+
+

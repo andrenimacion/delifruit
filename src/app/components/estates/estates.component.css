@@ -1,0 +1,317 @@
+.conts{
+    height: auto;
+    min-height: 100vh;
+}
+.addc{
+    width: 92%;
+    margin-left: 5%;
+}
+.btnaddh{
+    background-color: #1a5ef3;
+    color: white;
+    margin-right: 5px;
+}
+.iconvisi{
+    font-size: 18px;
+    color: #5c5c5c;
+}
+.menuvert{
+    width: 100%;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    margin-top: -20;
+    background-color: #1a5ef3;
+    transition: all ease-in .2s;
+}
+.menuanimation{
+    margin-top: 0px;
+    opacity: 1;
+
+} 
+.leftmenu{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: 500;
+    color: white;
+}
+.rigthmenu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 15px;
+}
+.rigtmenut{
+    font-size: 15px;
+    color: #f2f2f2;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+.itemnextpage{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #1a5ef3;
+    transform: scale(0.5);
+    transition: all ease-in .1s;
+    opacity: 0;
+}
+.animatebtnfixed{
+    transform: scale(1);
+    opacity: 1;
+}
+.cont{
+    width: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+    transition: all ease-out .3s;
+}
+.conttables{
+    width: 100%;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contab{
+    min-width: 90%;
+    height: auto;
+    margin: 20px 5%;
+    background-color: white;
+    -webkit-box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+-moz-box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+border-radius: 5px;
+overflow: hidden;
+}
+.linertabd{
+    width: 100%;
+    height: 3px;
+    background-color: #1a5ef3;
+}
+.titletab{
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 55px;
+}
+.titletabtxt{
+    margin-left: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+.inputname{
+    color: #616161;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    background: none;
+    outline: none;
+}
+.icontitletab{
+    margin-right: 6px;
+}
+.titletab{
+    font-size: 20px;
+    font-weight: 500;
+    color: #333333;
+}
+.tbitems1{
+    width: 100%;
+    overflow-x: scroll;
+    border: none;
+}
+.tritems11{
+    background-color: rgb(240, 240, 240);
+    height: 55px;
+    border-left: 15px solid rgb(240, 240, 240);
+    border-left: 15px solid rgb(240, 240, 240);
+}
+.tritems12{
+    cursor: pointer;
+    height: 60px;
+    overflow: hidden;
+}
+.tritems12:hover{
+    background-color: rgb(245, 245, 245);
+}
+.tditems11{
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    font-weight: 500;
+}
+.tditems12{
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    font-weight: 400;
+}
+.endtable{
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+}
+.endtable2{
+    margin-left: 7px;
+    margin-right: 5px;
+    font-size: 22px;
+    color: #333333;
+    font-weight: 500;
+}
+.textbtnord{
+    font-size: 14px;
+    color: #808080;
+}
+.iconord{
+    font-size: 18px;
+    color: #808080;
+}
+.divrigthtol{
+    margin-right: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.btnadd{
+    background-color: #1a5ef3;
+    margin-left: 15px;
+    color: white;
+    font-weight: 400;
+}
+.condi{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.titledi{
+    width: 100%;
+    font-size: 18px;
+    color: #333333;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.inputdi{
+    width: 100%;
+    margin-top: 5px;
+}
+.btnaddhdi{
+    width: 100px;
+    background-color: #1a5ef3;
+    color: white;
+    margin-top: 15px;
+}
+.btnclosedhdi{
+    margin-left: 10px;
+    width: 80px;
+    background-color: transparent;
+    color: #333333;
+    margin-top: 15px;
+}
+.contibtns{
+    display: flex;
+    flex-direction: row;
+}
+.iconsetti{
+    font-size: 18px;
+    color: #808080;
+}
+.theader{
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+}
+.itmsm{
+    width: 34%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    background: rgba(234, 236, 240, 0.905);
+}
+.itmsi{
+    width: 34%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #333333;;
+}
+.tbody{
+    width: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.item{
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.subitem{
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    transition: all ease-out .3s;
+}
+.subitem:hover{
+    background: rgba(0,0,0,0.06);
+}
+.item:hover > .btndelete{
+    right: 10px;
+    opacity: 1;
+}
+.btndelete{
+    position: absolute;
+    right: -50px;
+    opacity: 0;
+    background-color: #ffffff;
+    top: 5px;
+    transform: scale(0.8);
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+    transition: all ease-out .3s;
+}
+.btndelete:hover{
+    background-color: #df2a2a;
+}
+.btndelete:hover .icondelete{
+    color: white;
+}
+.icondelete{
+    transition: all ease-out .3s;
+    color: rgb(112, 112, 112);
+}
+.btnnext{
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    background-color: #1c5cff;
+}
+.iconnext{
+    color: white;
+}

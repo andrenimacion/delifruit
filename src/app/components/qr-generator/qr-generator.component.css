@@ -1,0 +1,265 @@
+.cont{
+    width: 100%;
+    max-height: 100%;
+    height: auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: whitesmoke;
+    transition: all ease-out .3s;
+} 
+.create{
+    border-top: 2px solid #1c5cff;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    height: 220px;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+overflow: hidden;
+z-index: 15;
+opacity: 0;
+margin-top: 80px;
+margin-bottom: 10px;
+animation: addcolora .4s ease-out both;
+}
+@keyframes addcolora {
+    to{
+        margin-top: 30px;
+        opacity: 1;
+    }
+}
+.heigtht{
+    height: 255px;
+}
+.headeradd{
+    min-height: 40px;
+    margin: 30px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    width: calc(100% - 70px);
+    background: #1c5cff1e;
+    border-radius: 0px 0px 8px 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0;
+    color: #333333;
+    animation: headeradda ease-out .2s both;
+}
+@keyframes headeradda {
+    to{
+        opacity: 1;
+    }
+}
+.mat-stepper{
+    width:100%;
+}
+.forms{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.inputs{
+    width: 49%;
+}
+.contbtn{
+    margin-top: 12px;
+}.inputs2{
+    width: 68%;
+}
+.inputs3{
+    width: 30%;
+}
+::ng-deep .mat-badge-content { 
+    background: #1c5cff;
+    color: whitesmoke;
+}
+.conph{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.mtabla{
+    margin-top: 80px;
+    width: 50% !important;
+    opacity: 0;
+    margin-bottom: 20px;
+    animation: addcolora .4s .2s ease-out both;
+}
+.addcolorph{
+    width: 90% !important;
+    min-height: 400px;
+}
+
+.colormuestraitem{
+    width: 26px;
+    height: 26px;
+    border-radius: 16px;
+    margin: auto;
+    background-color: #1c5cff;
+}
+.semaitem{
+    min-width: 60px !important;
+    max-width: 60px !important;
+    width: 60px !important;
+    margin:  0px !important;
+    margin-left: 30px;
+}
+.btnprint{
+    background: #fff704;
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    transform: scale(.5);
+    opacity: 0;
+    color: #333333;
+    animation: btnprinta ease-out .4s both;
+}
+@keyframes btnprinta {
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.card3{
+    width: 0px;
+    max-width: 0px;
+    overflow: hidden;
+    max-height: 0px;
+}
+.conleft{
+    width: calc(50% - 60px);
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.createph{
+    width: 90%;
+}
+.qrcodes{
+    border-top: 2px solid #1c5cff;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow-y: scroll;
+    max-height: calc(100% - 330px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+overflow: hidden;
+z-index: 15;
+opacity: 0;
+margin-top: 80px;
+margin-bottom: 10px;
+animation: qrcodesa .4s ease-out both;
+}
+@keyframes qrcodesa {
+    to{
+        margin-top: 25px;
+        opacity: 1;
+    }
+}
+.page{
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+.qrcodesph{
+    display: none;
+}
+.item{
+    opacity: 0;
+    animation-name: itemsa;
+    animation-duration: .3s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+@keyframes itemsa {
+    to{
+        opacity: 1;
+    }
+}
+.item:hover .btnreport{
+    right: 45px;
+    opacity: 1;
+}
+.btnreport{
+    position: absolute !important;
+    right: -40px;
+    top: 5px;
+    opacity: 0;
+    transform: scale(0.8);
+    background: white;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    -moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    transition: all ease-out .3s;
+}
+.btnreport:hover{
+    background-color: #1c5cff;
+}
+.btnreport:hover .iconreport{
+    color: white;
+}
+.iconreport{
+    transition: all ease-out .3s;
+    color: #555555;
+}
+.selectanio{
+    margin-right: 15px;
+    margin-top: 4px;
+    width: 150px;
+    opacity: 0.7;
+    transition: all ease-out .3s;
+}
+.selectanio:hover{
+    opacity: 1;
+}
+::ng-deep .mat-form-field-label{
+    color:rgba(104, 104, 104, 0.8) !important;
+ }
+ ::ng-deep .mat-focused .mat-form-field-label {
+    color: #ffffff !important;
+    opacity: 0 !important;
+   }
+   ::ng-deep .mat-form-field-label .ng-tns-c107-9{
+    color: #000000 !important;
+    opacity: 0.6 !important;
+   }
+   ::ng-deep.mat-form-field-underline {
+    background-color: rgba(104, 104, 104, 0.8) !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   background-color: rgba(104, 104, 104, 0.8) !important;
+  }
+  ::ng-deep .mat-input-element::placeholder{
+    color: rgba(104, 104, 104, 0.8) !important;
+ }
+.loading_list{
+    margin-left: 20px;
+    margin-right: 22px;
+}
+.opacity_line{
+    border-top: 0px solid transparent !important;
+}

@@ -1,0 +1,134 @@
+<div class="cont" ngClass.lt-sm="conph" id="tab">
+    <div class="conleft" ngClass.lt-sm="createph">
+      <div class="create"  [class.heigtht]="code_master" >
+        <mat-progress-bar *ngIf="loadingadd" class="loadingadd" mode="query"></mat-progress-bar>
+        <div class="headeradd" *ngIf="code_master">Codigo: <span style="font-weight: 500;padding-left: 5px;"> {{code_master}}</span></div>
+        <mat-stepper linear #stepper class="mat-stepper">
+            <mat-step [stepControl]="firstFormGroup" editable>
+              <form [formGroup]="firstFormGroup" class="forms" #formDirective="ngForm">
+                <ng-template matStepLabel title="Hacienda y Lote">Hacienda y Lote</ng-template>
+                <mat-form-field appearance="fill" class="inputs" ngClass.lt-sm="inputsph">
+                  <mat-label>Selecione una Hacienda</mat-label>
+                  <mat-select formControlName="hacienda">
+                    <mat-option *ngFor="let hacienda of states" (click)="loadlots(hacienda.nombre, hacienda.nomtag)" [value]="hacienda.nombre">
+                      {{hacienda.nombre}} / {{hacienda.codigo}}
+                  </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="firstFormGroup.controls['hacienda'].hasError('required')">Selecione una hacienda valida</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="inputs" (click)="notlots()">
+                    <mat-label>
+                      Lote:
+                  </mat-label>
+                  <mat-select formControlName="lote">
+                    <mat-option value="one" *ngFor="let x of lots">
+                      <div class="d-flex align-items-center justify-content-between" (click)="selectlot(x.codigo);create_code_master(2)">
+                       Nom: {{x.nombre}} / Cod: {{x.codigo}}
+                      </div>
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="firstFormGroup.controls['lote'].hasError('required')">Selecione un lote valido</mat-error>
+                  </mat-form-field> 
+                <div class="contbtn">
+                  <button mat-button matStepperNext [disabled]="!this.firstFormGroup.valid">Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup" editable>
+              <form [formGroup]="secondFormGroup" class="forms">
+                <ng-template matStepLabel title="Semana y año">Semana y año</ng-template>
+                <mat-form-field appearance="fill" class="inputs2" ngClass.lt-sm="inputsph">
+                    <mat-label>Selecione una semana</mat-label>
+                    <mat-select formControlName="semana">
+                      <mat-option *ngFor="let week of weeks" [value]="week.sema" (click)="selectweek(week.color_asign, week.sema)">
+                        {{"Semana: " + week.sema + ", Año:" + week.anio  }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="secondFormGroup.controls['semana'].hasError('required')">Selecione una semana valida</mat-error>
+                  </mat-form-field>
+                <mat-form-field appearance="fill" class="inputs3">
+                  <mat-label>Año:</mat-label>
+                  <input type="text" matInput formControlName="inputyear" (change)="updateyear()" (keyup)="updateyear()" placeholder="Last name, First name">
+                  <mat-error *ngIf="secondFormGroup.controls['inputyear'].hasError('minlength')">Selecione un año valido</mat-error>
+                  <mat-error *ngIf="secondFormGroup.controls['inputyear'].hasError('pattern')">No se admiten Letras</mat-error>
+                  <mat-error *ngIf="secondFormGroup.controls['inputyear'].hasError('maxlength')">Selecione un año valido</mat-error>
+                </mat-form-field>
+                <div> 
+                  <button mat-button (click)="create_code_master(2)" matStepperPrevious>Regresar</button>
+                  <button mat-button (click)="create_code_master(4)" [disabled]="!this.secondFormGroup.valid" matStepperNext>Siguiente</button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="threeFormGroup" editable>
+              <form [formGroup]="threeFormGroup">
+              <ng-template matStepLabel title="Cantidad y generar">Cantidad y generar</ng-template>
+              <mat-form-field appearance="fill" style="width: 98%;">
+                <mat-label>Cantidad:</mat-label>
+                <input type="text" matInput formControlName="cant" (keyup.enter)="generateBarcode(stepper)" (change)="changecant();" (keyup)="changecant();">
+                <mat-error *ngIf="threeFormGroup.controls['cant'].hasError('pattern')">No se admiten Letras</mat-error>
+                <mat-error *ngIf="threeFormGroup.controls['cant'].hasError('minlength')">Selecione una cantidad valida</mat-error>
+                <mat-error *ngIf="threeFormGroup.controls['cant'].hasError('maxlength')">Selecione una cantidad valida</mat-error>
+              </mat-form-field>
+              </form>
+              <div style="display: flex;flex-direction: row;">
+                <button mat-button  (click)="create_code_master(4)" matStepperPrevious>Regresar</button>
+                <button mat-button [disabled]="!this.threeFormGroup.valid" (click)="generateBarcode(stepper);">
+                  <mat-spinner [diameter]="22" class="loading_list" *ngIf="loading_gen"></mat-spinner>
+                  <span *ngIf="!loading_gen"> Generar <span *ngIf="this.threeFormGroup.valid">( {{ threeFormGroup.get("cant")?.value }} )</span></span>
+                </button>
+              </div>
+            </mat-step>
+          </mat-stepper>
+    </div>
+    <div class="qrcodes" *ngIf="showprint" ngClass.lt-sm="qrcodesph">
+      <div class="page" id="pageqr">
+        <div *ngFor="let qr of arrqr" style="margin-left: 22px;border: 1px solid transparent;display: flex;justify-content: flex-start;align-items: flex-start;flex-direction: row;" [ngStyle]="{'height': qr.heigth,'min-height': qr.heigth }">
+          <div style="display: flex;justify-content: center;align-items: center;margin-top: 10px;">
+            <div style="font-family: Arial;font-size: 14px;color: black;writing-mode: vertical-lr;">{{qr.code | uppercase}}</div>
+            <img style="width: 70px;height: 70px;margin: 0px 5px;" [src]="qr.data">
+            <div style="font-family: Arial;font-size: 14px;color: black;writing-mode: vertical-lr;">{{qr.color | uppercase}}</div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    </div>
+    <div class="mtabla"  ngClass.lt-sm="addcolorph" [class.opacity_line]="loading">
+      <mat-progress-bar *ngIf="loading" class="loading" mode="query"></mat-progress-bar>
+      <div class="mheader">
+        <div class="mhtitle"><span class="material-icons icontitle">qr_code</span>Codigos Qr</div>
+        <mat-form-field class="selectanio">
+          <mat-label>Selecione Estado</mat-label>
+          <mat-select [formControl]="state" >
+            <mat-option *ngFor="let state of arrstates" (click)="select_state()" [value]="state.value">
+              {{state.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="mbody">
+          <div class="mthead">
+            <div class="mthtitle" (click)="changeorder('codec_lotes')">Codigo<span id="codec_lotes" class="material-icons iconord"></span></div>
+            <div class="mthtitle" (click)="changeorder('hacienda_tag')">Hacienda<span id="hacienda_tag" class="material-icons iconord"></span></div>
+            <div class="mthtitle" (click)="changeorder('cantidad')">Cantidad<span id="cantidad" class="material-icons iconord"></span></div>
+          </div>
+          <div class="mtbody">
+            <div class="itemnull" *ngIf="!codesqr[0]">
+              No hay codigos disponibles
+            </div>
+            <div class="item" *ngFor="let qr of codesqr;index as i" [ngStyle]="{'animation-delay' : i/15+'s'}">
+              <div class="subitem" matRipple (click)="generatecodex(qr)" [ngStyle]="{'border-left': '3px solid '+qr.codec_color}">
+                <div class="mthtitle">{{qr.codec_lotes}}</div>
+                <div class="mthtitle">{{qr.hacienda_tag}}</div>
+                <div class="mthtitle">{{qr.cantidad}}</div>
+              </div>
+              <button mat-icon-button (click)="report(qr.hacienda_tag)" class="btnreport"><mat-icon class="iconreport">task_alt</mat-icon> </button>
+              <button mat-icon-button (click)="deletecodeqr(qr.id, qr.hacienda_tag, qr.codec_lotes)" class="btncelar"><mat-icon class="iconbtnm">clear</mat-icon> </button>
+            </div>
+          </div>
+        </div>
+        <!-- Aqui iria algun sub body -->
+      <div class=""></div>
+    </div>
+    <button mat-fab class="btnprint" *ngIf="showprint" (click)="print()" aria-label="Example icon button with a delete icon"><mat-icon [matBadge]="cantglobal" >print</mat-icon> </button>
+</div>
+<span id="finit"></span>

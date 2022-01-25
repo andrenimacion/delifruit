@@ -1,0 +1,19 @@
+<from class="condi" [formGroup]="lot">
+    <div class="titledi">Agregar Lote</div>
+    <mat-form-field class="inputdi">
+        <mat-label>Código Lote:</mat-label>
+        <input matInput placeholder="Lote 1" formControlName="code">
+    </mat-form-field>                    
+    
+    <mat-form-field class="inputdi">
+        <mat-label>Nombre Lote:</mat-label>
+        <input matInput  placeholder="D1.01" formControlName="name">
+    </mat-form-field>                    
+    
+    <mat-form-field class="inputdi">
+        <mat-label>Hectareaje:</mat-label>
+        <input matInput placeholder="10.5" type="number" formControlName="hect">
+    </mat-form-field>                    
+    <button mat-button class="btnaddhdi" (click)="add()" ><mat-icon style="color: white;">add</mat-icon> Crear</button>
+    <button mat-button class="btnclosedhdi" (click)="closed()" >Cancelar</button>
+</from>

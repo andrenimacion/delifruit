@@ -1,0 +1,324 @@
+.contener{
+    width: 100%;
+    overflow-y: scroll;
+    min-height: 100%;
+    max-height: 100%;
+    background-color: #e8e8e8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    opacity: 1;
+    transition: all ease-out .3s;
+}
+.carditems{
+    margin-top: 80px;
+    transition: all ease-in .3s;
+    opacity: 0;
+    width: 80%;
+    padding: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: carditemsa .4s ease-out both;
+}
+@keyframes carditemsa {
+    to{
+        margin-top: 30px;
+        opacity: 1;
+    }
+}
+.btnselectcolor{
+    width: 48%;
+    height: 40px;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 14px;
+
+}
+.inputscolors{
+    width: 48%;
+}
+.control-color {
+    height: 30px;
+    margin-bottom: 10px;
+    width: 300px;
+    border: solid 1px gray;
+    border-radius: 5px;
+}
+.tr {
+    border-left: solid 60px;
+} 
+.itemnextpage{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #1a5ef3;
+    transform: scale(0.5);
+    transition: all ease-in .1s;
+    opacity: 0;
+    animation: itemshow .2s .2s ease-out both;
+}
+@keyframes itemshow{
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.animatebtnfixed{
+    transform: scale(1);
+    opacity: 1;
+}
+.menuvert{
+    width: 100%;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 1;
+    margin-top: -20;
+    background-color: #1a5ef3;
+    transition: all ease-in .2s;
+}
+.leftmenu{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: 500;
+    color: white;
+}
+.rigthmenu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 15px;
+}
+.rigtmenut{
+    font-size: 15px;
+    color: #f2f2f2;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+.tbitems1{
+    opacity: 1;
+    margin-top: 30px;
+    width: 90%;
+    background-color: white;
+    overflow-x: scroll;
+    border-radius: 5px;
+    border: none;
+    -webkit-box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+-moz-box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+box-shadow: 0px 1px 5px -1px rgba(0,0,0,0.52);
+}
+.divitems10{
+    background-color: rgb(255, 255, 255);
+    height: 50px;
+}
+.tritems11{
+    background-color: rgb(236, 236, 236);
+    height: 55px;
+    border-left: 15px solid rgb(236, 236, 236);
+    border-left: 15px solid rgb(236, 236, 236);
+}
+.tritems12{
+    cursor: pointer;
+    height: 60px;
+    overflow: hidden;
+}
+.tritems12:hover{
+    background-color: rgb(245, 245, 245);
+}
+.tditems11{
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    font-weight: 500;
+}
+.tditems12{
+    text-align: center;
+    font-size: 15px;
+    color: #333333;
+    font-weight: 400;
+}
+.colormuestraitem{
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    margin: auto;
+}
+.btnicon{
+    margin-top: 7px;
+    opacity: 0.6;
+    transition: all ease-out .3s;
+
+}
+
+.btnicon:hover{
+    opacity: 1;
+}
+.tableheader{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.titletable{
+    font-size: 16px;
+    color: #444444;
+    margin-left: 20px;
+}
+.contref{
+    margin-right: 20px;
+}
+.selectanio{
+    margin-top: 8px;
+    margin-right: 20px;
+    width: 150px;
+}
+::ng-deep .mat-form-field-underline{
+    opacity: 0;
+}
+.btnorder{
+    font-size: 13px;
+    color: #4f4f4f;
+    margin-left: 5px;
+}
+.iconorder{
+    font-size: 16px;
+    margin-left: 5px;
+    color: #707070;
+}
+.mtabla{
+    width: 90%;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 80px;
+    opacity: 0;
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.42);
+background-color: white;
+margin-bottom: 10px;
+animation: carditemsa .4s .2s ease-out both;
+}
+.mheader{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.mhtitle{
+    font-size: 16px;
+    color: #555555;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    align-items: center;
+}
+.icontitle{
+    color: #919191;
+    font-size: 22px;
+    margin-right: 3px;
+    margin-bottom: 1px;
+}
+.mtabled{
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    overflow-x: scroll;
+}
+.mthead{
+    min-width: 200px !important;
+    background-color: #e4e6ee;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+}
+.mthtitle{
+    min-width: 100px;
+    height: 50px;
+    margin: auto;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.iconord{
+    color: #777777;
+    font-size: 18px;
+    margin-left: 3px;
+}
+.mtbody{
+    max-width: 100% !important;
+    max-height: 500px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+.item{
+    width: 100%;
+    height: 50px;
+    min-height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.item:hover .btncelar{
+    right: 10px;
+    opacity: 1;
+}
+.subitem{
+    width: 100% !important;
+    height: 50px;
+    cursor: pointer;
+    transition: all ease-out .3s;
+    display: flex;
+    flex-direction: row;
+}
+.subitem:hover{
+    background: rgba(0,0,0,0.06);
+}
+.btncelar{
+    position: absolute;
+    right: -40px;
+    top: 5px;
+    opacity: 0;
+    transform: scale(0.8);
+    background: white;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    -moz-box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.42);
+    transition: all ease-out .3s;
+}
+.btncelar:hover{
+    background-color: #cc2424;
+}
+.btncelar:hover .iconbtnm{
+    color: white;
+}
+
+.iconbtnm{
+    transition: all ease-out .3s;
+    color: #555555;
+}
+.mtbody{
+    width: 140% !important;
+}

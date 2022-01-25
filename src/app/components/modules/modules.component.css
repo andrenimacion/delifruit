@@ -1,0 +1,96 @@
+.contitem{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    transition: all ease-in .3s;
+}
+.item{
+    min-width: 120px;
+    max-width: 120px;
+    min-height: 130px;
+    max-height: 130px;
+    border-radius: 5px;
+    background-color: #6f6f6fe3;
+    margin: 10px;
+    margin-top: 80px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+-moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.16);
+transition: all ease-out .5s;
+animation-name: items;
+animation-timing-function: ease-in;
+animation-fill-mode: both;
+animation-duration: .4s;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+opacity: 0;
+}
+@keyframes items{
+    to{
+        opacity: 1;
+        margin-top: 30px;
+        background-color: #ffffffe3;
+    }
+}
+.iconm{
+    font-size: 34pt !important;
+    color: #0743da;
+}
+.conticon{
+    width: 100%;
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 50px;
+padding-right: 20px;
+}
+.item:hover{
+    transform: scale(1.03);
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.22);
+-moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
+box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
+}
+.icono{
+    position: absolute;
+    bottom: 10px;
+    right: 35px;
+}
+.texti{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #0743da;
+}
+.anit0{animation-delay: .1s;}
+.anit1{animation-delay: .2s;}
+.anit2{animation-delay: .3s;}
+.anit3{animation-delay: .4s;}
+.anit4{animation-delay: .5s;}
+.anit5{animation-delay: .6s;}
+.anit6{animation-delay: .7s;}
+.anit7{animation-delay: .8s;}
+.anit8{animation-delay: .9s;}
+.anit9{animation-delay:  1s;}
+.exit{
+    opacity: 0;
+    transform: scale(0.8);
+}
+.items{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.5);
+}
+.into{
+    opacity: 1;
+    transform: scale(1);
+}

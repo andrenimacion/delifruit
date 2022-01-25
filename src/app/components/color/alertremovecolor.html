@@ -1,0 +1,9 @@
+<div class="cont2">
+    <div class="divtitle">Esta seguro que desea borrar!</div>
+    <div class="divtext">Si borra este color se perderan de forma permanente todos los registros vinculados a ete color</div>
+     <mat-checkbox color="warn" [formControl]="checkformcontrol" class="check">Borrar todas las etiquetas</mat-checkbox>
+      <div class="divbutom"> 
+        <button mat-button [disabled]="enablebtn" (click)="acept()" class="btnacep">{{textcont}}</button> 
+        <button mat-button  class="btncancel" (click)="cancelbtn()">Cancelar</button> 
+      </div>     
+</div> 
